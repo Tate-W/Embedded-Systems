@@ -1,0 +1,177 @@
+ARM GAS  build/m1a.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"m1a.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "src/m1a.c"
+  20              		.section	.text.delay_loop,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	delay_loop:
+  27              	.LVL0:
+  28              	.LFB3:
+   1:src/m1a.c     **** /*
+   2:src/m1a.c     **** 1. The period is 1 second. This was found by 1. Using a stopwatch and manually finding it and 2. Us
+   3:src/m1a.c     ****    using the clock frequency to calculate the period.
+   4:src/m1a.c     **** 
+   5:src/m1a.c     **** 2. The frequency of the main clock is set at 80MHz by default as it is the max clock speed. This is
+   6:src/m1a.c     **** 
+   7:src/m1a.c     **** 3.
+   8:src/m1a.c     **** 
+   9:src/m1a.c     **** 4. Since the delay_loop is already making the LED flash at 1 second, all that would need to be done
+  10:src/m1a.c     ****    input by 7.
+  11:src/m1a.c     **** */
+  12:src/m1a.c     **** 
+  13:src/m1a.c     **** #ifndef STM32L4
+  14:src/m1a.c     ****    #define STM32L4
+  15:src/m1a.c     **** #endif
+  16:src/m1a.c     **** 
+  17:src/m1a.c     **** #include <errno.h>
+  18:src/m1a.c     **** #include <stdio.h>
+  19:src/m1a.c     **** #include <unistd.h>
+  20:src/m1a.c     **** #include <libopencm3/stm32/rcc.h>
+  21:src/m1a.c     **** #include <libopencm3/stm32/gpio.h>
+  22:src/m1a.c     **** #include "user_app.h"
+  23:src/m1a.c     **** 
+  24:src/m1a.c     **** static void delay_loop(int32_t loops)
+  25:src/m1a.c     **** {
+  29              		.loc 1 25 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ARM GAS  build/m1a.s 			page 2
+
+
+  26:src/m1a.c     ****     while(loops > 0)
+  34              		.loc 1 26 5 view .LVU1
+  35              		.loc 1 26 10 is_stmt 0 view .LVU2
+  36 0000 01E0     		b	.L2
+  37              	.L3:
+  27:src/m1a.c     ****     {
+  28:src/m1a.c     ****        asm("nop");
+  38              		.loc 1 28 8 is_stmt 1 view .LVU3
+  39              		.syntax unified
+  40              	@ 28 "src/m1a.c" 1
+  41 0002 00BF     		nop
+  42              	@ 0 "" 2
+  29:src/m1a.c     ****        loops--;
+  43              		.loc 1 29 8 view .LVU4
+  44              		.loc 1 29 13 is_stmt 0 view .LVU5
+  45              		.thumb
+  46              		.syntax unified
+  47 0004 0138     		subs	r0, r0, #1
+  48              	.LVL1:
+  49              	.L2:
+  26:src/m1a.c     ****     while(loops > 0)
+  50              		.loc 1 26 17 is_stmt 1 view .LVU6
+  51 0006 0028     		cmp	r0, #0
+  52 0008 FBDC     		bgt	.L3
+  30:src/m1a.c     ****     }
+  31:src/m1a.c     **** }
+  53              		.loc 1 31 1 is_stmt 0 view .LVU7
+  54 000a 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE3:
+  58              		.section	.text.main,"ax",%progbits
+  59              		.align	1
+  60              		.global	main
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	main:
+  66              	.LFB4:
+  32:src/m1a.c     **** 
+  33:src/m1a.c     **** int main(void)
+  34:src/m1a.c     **** {
+  67              		.loc 1 34 1 is_stmt 1 view -0
+  68              		.cfi_startproc
+  69              		@ Volatile: function does not return.
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 08B5     		push	{r3, lr}
+  73              	.LCFI0:
+  74              		.cfi_def_cfa_offset 8
+  75              		.cfi_offset 3, -8
+  76              		.cfi_offset 14, -4
+  35:src/m1a.c     ****     rcc_periph_clock_enable(RCC_GPIOA);
+  77              		.loc 1 35 5 view .LVU9
+  78 0002 4FF41860 		mov	r0, #2432
+  79 0006 FFF7FEFF 		bl	rcc_periph_clock_enable
+  80              	.LVL2:
+  36:src/m1a.c     ****     gpio_mode_setup(LED2_GPIO_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, LED2_Pin);
+ARM GAS  build/m1a.s 			page 3
+
+
+  81              		.loc 1 36 5 view .LVU10
+  82 000a 2023     		movs	r3, #32
+  83 000c 0122     		movs	r2, #1
+  84 000e 1146     		mov	r1, r2
+  85 0010 4FF09040 		mov	r0, #1207959552
+  86 0014 FFF7FEFF 		bl	gpio_mode_setup
+  87              	.LVL3:
+  88              	.L5:
+  37:src/m1a.c     ****     while(1)
+  89              		.loc 1 37 5 discriminator 1 view .LVU11
+  38:src/m1a.c     ****     {
+  39:src/m1a.c     ****        gpio_toggle(LED2_GPIO_Port, LED2_Pin);
+  90              		.loc 1 39 8 discriminator 1 view .LVU12
+  91 0018 2021     		movs	r1, #32
+  92 001a 4FF09040 		mov	r0, #1207959552
+  93 001e FFF7FEFF 		bl	gpio_toggle
+  94              	.LVL4:
+  40:src/m1a.c     ****        delay_loop(400000);
+  95              		.loc 1 40 8 discriminator 1 view .LVU13
+  96 0022 0248     		ldr	r0, .L7
+  97 0024 FFF7FEFF 		bl	delay_loop
+  98              	.LVL5:
+  37:src/m1a.c     ****     while(1)
+  99              		.loc 1 37 10 discriminator 1 view .LVU14
+ 100 0028 F6E7     		b	.L5
+ 101              	.L8:
+ 102 002a 00BF     		.align	2
+ 103              	.L7:
+ 104 002c 801A0600 		.word	400000
+ 105              		.cfi_endproc
+ 106              	.LFE4:
+ 108              		.text
+ 109              	.Letext0:
+ 110              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 111              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 112              		.file 4 "/home/tatew/libopencm3/include/libopencm3/stm32/common/gpio_common_all.h"
+ 113              		.file 5 "/home/tatew/libopencm3/include/libopencm3/stm32/common/gpio_common_f234.h"
+ 114              		.file 6 "/home/tatew/libopencm3/include/libopencm3/stm32/common/rcc_common_all.h"
+ 115              		.file 7 "/home/tatew/libopencm3/include/libopencm3/stm32/l4/rcc.h"
+ARM GAS  build/m1a.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 m1a.c
+         build/m1a.s:21     .text.delay_loop:00000000 $t
+         build/m1a.s:26     .text.delay_loop:00000000 delay_loop
+         build/m1a.s:59     .text.main:00000000 $t
+         build/m1a.s:65     .text.main:00000000 main
+         build/m1a.s:104    .text.main:0000002c $d
+
+UNDEFINED SYMBOLS
+rcc_periph_clock_enable
+gpio_mode_setup
+gpio_toggle

@@ -1,0 +1,2446 @@
+ARM GAS  build/m2a.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"m2a.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "src/m2a.c"
+  20              		.section	.rodata.advancePointer.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 6D794275 		.ascii	"myBuff\000"
+  23      666600
+  24 0007 00       		.align	2
+  25              	.LC1:
+  26 0008 7372632F 		.ascii	"src/circbuffer.h\000"
+  26      63697263 
+  26      62756666 
+  26      65722E68 
+  26      00
+  27              		.section	.text.advancePointer,"ax",%progbits
+  28              		.align	1
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  33              	advancePointer:
+  34              	.LVL0:
+  35              	.LFB8:
+  36              		.file 2 "src/circbuffer.h"
+   1:src/circbuffer.h **** #ifndef CIRCBUFFER_H
+   2:src/circbuffer.h ****     #define CIRCBUFFER_h
+   3:src/circbuffer.h ****     #include <assert.h>
+   4:src/circbuffer.h ****     #include <stdbool.h>
+   5:src/circbuffer.h **** 
+   6:src/circbuffer.h **** 
+   7:src/circbuffer.h **** typedef struct circbuffer{
+   8:src/circbuffer.h ****     char* buffer;
+   9:src/circbuffer.h ****     uint8_t headIndex;
+  10:src/circbuffer.h ****     uint8_t tailIndex;
+  11:src/circbuffer.h ****     bool isFull;
+  12:src/circbuffer.h ****     uint8_t max;
+  13:src/circbuffer.h **** }circbuffer;
+  14:src/circbuffer.h **** 
+  15:src/circbuffer.h **** void circbuffer_reset(circbuffer* myBuff){
+  16:src/circbuffer.h ****     assert(myBuff);
+  17:src/circbuffer.h **** 
+ARM GAS  build/m2a.s 			page 2
+
+
+  18:src/circbuffer.h ****     myBuff->headIndex = 0;
+  19:src/circbuffer.h ****     myBuff->tailIndex = 0;
+  20:src/circbuffer.h ****     myBuff->isFull = false;
+  21:src/circbuffer.h **** }
+  22:src/circbuffer.h **** 
+  23:src/circbuffer.h **** bool bufferIsEmpty(circbuffer* myBuff ){
+  24:src/circbuffer.h ****     assert(myBuff);
+  25:src/circbuffer.h **** 
+  26:src/circbuffer.h ****     return(!myBuff->isFull && (myBuff->headIndex == myBuff->tailIndex));
+  27:src/circbuffer.h **** }
+  28:src/circbuffer.h **** 
+  29:src/circbuffer.h **** void circbuffer_init(circbuffer* myBuff, char* buff, int size){
+  30:src/circbuffer.h ****     assert(myBuff && buff && size);
+  31:src/circbuffer.h ****     
+  32:src/circbuffer.h ****     myBuff->buffer = buff;
+  33:src/circbuffer.h ****     myBuff->max = size;
+  34:src/circbuffer.h ****     circbuffer_reset(myBuff);
+  35:src/circbuffer.h **** 
+  36:src/circbuffer.h ****     assert(bufferIsEmpty(myBuff));
+  37:src/circbuffer.h **** }
+  38:src/circbuffer.h **** 
+  39:src/circbuffer.h **** bool bufferIsFull(circbuffer* myBuff){
+  40:src/circbuffer.h ****     assert(myBuff);
+  41:src/circbuffer.h ****     return myBuff->isFull;
+  42:src/circbuffer.h **** }
+  43:src/circbuffer.h **** 
+  44:src/circbuffer.h **** uint8_t circbuff_entries(circbuffer* myBuff){
+  45:src/circbuffer.h ****     assert(myBuff);
+  46:src/circbuffer.h **** 
+  47:src/circbuffer.h **** 	uint8_t size = myBuff->max;
+  48:src/circbuffer.h **** 
+  49:src/circbuffer.h **** 	if(!myBuff->isFull){
+  50:src/circbuffer.h **** 	
+  51:src/circbuffer.h ****     	if(myBuff->headIndex >= myBuff->tailIndex)
+  52:src/circbuffer.h **** 			size = myBuff->headIndex - myBuff->tailIndex;
+  53:src/circbuffer.h **** 		else
+  54:src/circbuffer.h **** 			size = myBuff->max + myBuff->headIndex - myBuff->tailIndex;
+  55:src/circbuffer.h **** 	}
+  56:src/circbuffer.h **** 	
+  57:src/circbuffer.h ****     return size;
+  58:src/circbuffer.h **** }
+  59:src/circbuffer.h **** 
+  60:src/circbuffer.h **** 
+  61:src/circbuffer.h **** static void advancePointer(circbuffer* myBuff){
+  37              		.loc 2 61 47 view -0
+  38              		.cfi_startproc
+  39              		@ args = 0, pretend = 0, frame = 0
+  40              		@ frame_needed = 0, uses_anonymous_args = 0
+  41              		.loc 2 61 47 is_stmt 0 view .LVU1
+  42 0000 08B5     		push	{r3, lr}
+  43              	.LCFI0:
+  44              		.cfi_def_cfa_offset 8
+  45              		.cfi_offset 3, -8
+  46              		.cfi_offset 14, -4
+  62:src/circbuffer.h ****     assert(myBuff);
+  47              		.loc 2 62 4 is_stmt 1 view .LVU2
+  48              		.loc 2 62 16 is_stmt 0 view .LVU3
+ARM GAS  build/m2a.s 			page 3
+
+
+  49 0002 C0B1     		cbz	r0, .L6
+  50 0004 0346     		mov	r3, r0
+  63:src/circbuffer.h **** 
+  64:src/circbuffer.h ****     if(myBuff->isFull){
+  51              		.loc 2 64 5 is_stmt 1 view .LVU4
+  52              		.loc 2 64 14 is_stmt 0 view .LVU5
+  53 0006 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+  54              		.loc 2 64 7 view .LVU6
+  55 0008 32B1     		cbz	r2, .L3
+  65:src/circbuffer.h ****         if(++(myBuff->headIndex) == myBuff->tailIndex){
+  56              		.loc 2 65 9 is_stmt 1 view .LVU7
+  57              		.loc 2 65 21 is_stmt 0 view .LVU8
+  58 000a 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+  59              		.loc 2 65 12 view .LVU9
+  60 000c 0132     		adds	r2, r2, #1
+  61 000e D2B2     		uxtb	r2, r2
+  62              		.loc 2 65 11 view .LVU10
+  63 0010 0271     		strb	r2, [r0, #4]
+  64              		.loc 2 65 43 view .LVU11
+  65 0012 4179     		ldrb	r1, [r0, #5]	@ zero_extendqisi2
+  66              		.loc 2 65 11 view .LVU12
+  67 0014 8A42     		cmp	r2, r1
+  68 0016 14D0     		beq	.L7
+  69              	.L3:
+  66:src/circbuffer.h ****             myBuff->tailIndex = 0;
+  67:src/circbuffer.h ****         }
+  68:src/circbuffer.h ****     }
+  69:src/circbuffer.h **** 
+  70:src/circbuffer.h ****     if(++(myBuff->headIndex) == myBuff->max){
+  70              		.loc 2 70 5 is_stmt 1 view .LVU13
+  71              		.loc 2 70 17 is_stmt 0 view .LVU14
+  72 0018 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+  73              		.loc 2 70 8 view .LVU15
+  74 001a 0132     		adds	r2, r2, #1
+  75 001c D2B2     		uxtb	r2, r2
+  76              		.loc 2 70 7 view .LVU16
+  77 001e 1A71     		strb	r2, [r3, #4]
+  78              		.loc 2 70 39 view .LVU17
+  79 0020 D979     		ldrb	r1, [r3, #7]	@ zero_extendqisi2
+  80              		.loc 2 70 7 view .LVU18
+  81 0022 8A42     		cmp	r2, r1
+  82 0024 10D0     		beq	.L8
+  83              	.L4:
+  71:src/circbuffer.h ****         myBuff->headIndex = 0;
+  72:src/circbuffer.h ****     }
+  73:src/circbuffer.h **** 
+  74:src/circbuffer.h ****     myBuff->isFull = (myBuff->headIndex == myBuff->tailIndex);
+  84              		.loc 2 74 5 is_stmt 1 view .LVU19
+  85              		.loc 2 74 29 is_stmt 0 view .LVU20
+  86 0026 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+  87              		.loc 2 74 50 view .LVU21
+  88 0028 5979     		ldrb	r1, [r3, #5]	@ zero_extendqisi2
+  89              		.loc 2 74 41 view .LVU22
+  90 002a 8A42     		cmp	r2, r1
+  91 002c 14BF     		ite	ne
+  92 002e 0022     		movne	r2, #0
+  93 0030 0122     		moveq	r2, #1
+ARM GAS  build/m2a.s 			page 4
+
+
+  94              		.loc 2 74 20 view .LVU23
+  95 0032 9A71     		strb	r2, [r3, #6]
+  75:src/circbuffer.h **** }
+  96              		.loc 2 75 1 view .LVU24
+  97 0034 08BD     		pop	{r3, pc}
+  98              	.L6:
+  62:src/circbuffer.h **** 
+  99              		.loc 2 62 18 discriminator 1 view .LVU25
+ 100 0036 064B     		ldr	r3, .L9
+ 101 0038 064A     		ldr	r2, .L9+4
+ 102 003a 3E21     		movs	r1, #62
+ 103 003c 0648     		ldr	r0, .L9+8
+ 104              	.LVL1:
+  62:src/circbuffer.h **** 
+ 105              		.loc 2 62 18 discriminator 1 view .LVU26
+ 106 003e FFF7FEFF 		bl	__assert_func
+ 107              	.LVL2:
+ 108              	.L7:
+  66:src/circbuffer.h ****         }
+ 109              		.loc 2 66 13 is_stmt 1 view .LVU27
+  66:src/circbuffer.h ****         }
+ 110              		.loc 2 66 31 is_stmt 0 view .LVU28
+ 111 0042 0022     		movs	r2, #0
+ 112 0044 4271     		strb	r2, [r0, #5]
+ 113 0046 E7E7     		b	.L3
+ 114              	.L8:
+  71:src/circbuffer.h ****     }
+ 115              		.loc 2 71 9 is_stmt 1 view .LVU29
+  71:src/circbuffer.h ****     }
+ 116              		.loc 2 71 27 is_stmt 0 view .LVU30
+ 117 0048 0022     		movs	r2, #0
+ 118 004a 1A71     		strb	r2, [r3, #4]
+ 119 004c EBE7     		b	.L4
+ 120              	.L10:
+ 121 004e 00BF     		.align	2
+ 122              	.L9:
+ 123 0050 00000000 		.word	.LC0
+ 124 0054 00000000 		.word	__func__.7
+ 125 0058 08000000 		.word	.LC1
+ 126              		.cfi_endproc
+ 127              	.LFE8:
+ 129              		.section	.text.backPointer,"ax",%progbits
+ 130              		.align	1
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	backPointer:
+ 136              	.LVL3:
+ 137              	.LFB9:
+  76:src/circbuffer.h **** 
+  77:src/circbuffer.h **** static void backPointer(circbuffer* myBuff){
+ 138              		.loc 2 77 44 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		.loc 2 77 44 is_stmt 0 view .LVU32
+ 143 0000 08B5     		push	{r3, lr}
+ARM GAS  build/m2a.s 			page 5
+
+
+ 144              	.LCFI1:
+ 145              		.cfi_def_cfa_offset 8
+ 146              		.cfi_offset 3, -8
+ 147              		.cfi_offset 14, -4
+  78:src/circbuffer.h ****     assert(myBuff);
+ 148              		.loc 2 78 4 is_stmt 1 view .LVU33
+ 149              		.loc 2 78 16 is_stmt 0 view .LVU34
+ 150 0002 48B1     		cbz	r0, .L15
+  79:src/circbuffer.h **** 
+  80:src/circbuffer.h ****     myBuff->isFull = false;
+ 151              		.loc 2 80 5 is_stmt 1 view .LVU35
+ 152              		.loc 2 80 20 is_stmt 0 view .LVU36
+ 153 0004 0023     		movs	r3, #0
+ 154 0006 8371     		strb	r3, [r0, #6]
+  81:src/circbuffer.h **** 
+  82:src/circbuffer.h ****     if(++(myBuff->tailIndex) == myBuff->max){
+ 155              		.loc 2 82 5 is_stmt 1 view .LVU37
+ 156              		.loc 2 82 17 is_stmt 0 view .LVU38
+ 157 0008 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+ 158              		.loc 2 82 8 view .LVU39
+ 159 000a 0133     		adds	r3, r3, #1
+ 160 000c DBB2     		uxtb	r3, r3
+ 161              		.loc 2 82 7 view .LVU40
+ 162 000e 4371     		strb	r3, [r0, #5]
+ 163              		.loc 2 82 39 view .LVU41
+ 164 0010 C179     		ldrb	r1, [r0, #7]	@ zero_extendqisi2
+ 165              		.loc 2 82 7 view .LVU42
+ 166 0012 8B42     		cmp	r3, r1
+ 167 0014 06D0     		beq	.L16
+ 168              	.L11:
+  83:src/circbuffer.h ****         myBuff->tailIndex = 0;
+  84:src/circbuffer.h ****     }
+  85:src/circbuffer.h **** }
+ 169              		.loc 2 85 1 view .LVU43
+ 170 0016 08BD     		pop	{r3, pc}
+ 171              	.L15:
+  78:src/circbuffer.h **** 
+ 172              		.loc 2 78 18 discriminator 1 view .LVU44
+ 173 0018 044B     		ldr	r3, .L17
+ 174 001a 054A     		ldr	r2, .L17+4
+ 175 001c 4E21     		movs	r1, #78
+ 176 001e 0548     		ldr	r0, .L17+8
+ 177              	.LVL4:
+  78:src/circbuffer.h **** 
+ 178              		.loc 2 78 18 discriminator 1 view .LVU45
+ 179 0020 FFF7FEFF 		bl	__assert_func
+ 180              	.LVL5:
+ 181              	.L16:
+  83:src/circbuffer.h ****         myBuff->tailIndex = 0;
+ 182              		.loc 2 83 9 is_stmt 1 view .LVU46
+  83:src/circbuffer.h ****         myBuff->tailIndex = 0;
+ 183              		.loc 2 83 27 is_stmt 0 view .LVU47
+ 184 0024 0023     		movs	r3, #0
+ 185 0026 4371     		strb	r3, [r0, #5]
+ 186              		.loc 2 85 1 view .LVU48
+ 187 0028 F5E7     		b	.L11
+ 188              	.L18:
+ARM GAS  build/m2a.s 			page 6
+
+
+ 189 002a 00BF     		.align	2
+ 190              	.L17:
+ 191 002c 00000000 		.word	.LC0
+ 192 0030 00000000 		.word	__func__.5
+ 193 0034 08000000 		.word	.LC1
+ 194              		.cfi_endproc
+ 195              	.LFE9:
+ 197              		.section	.text.clock_enable,"ax",%progbits
+ 198              		.align	1
+ 199              		.syntax unified
+ 200              		.thumb
+ 201              		.thumb_func
+ 203              	clock_enable:
+ 204              	.LFB13:
+ 205              		.file 3 "src/embsysS20.h"
+   1:src/embsysS20.h **** /*
+   2:src/embsysS20.h ****     Name: Tate Wieber
+   3:src/embsysS20.h ****     Course: Embedded Systems
+   4:src/embsysS20.h ****     Date: 2/24/23
+   5:src/embsysS20.h ****     Desciption: Header File for GPIO Pin & Ports
+   6:src/embsysS20.h **** */
+   7:src/embsysS20.h **** 
+   8:src/embsysS20.h **** 
+   9:src/embsysS20.h **** #ifndef EMBSYSS20_H
+  10:src/embsysS20.h **** #define EMBSYSS20_H
+  11:src/embsysS20.h **** 
+  12:src/embsysS20.h **** #ifndef STM32L4
+  13:src/embsysS20.h ****   #define STM32L4
+  14:src/embsysS20.h **** #endif
+  15:src/embsysS20.h **** 
+  16:src/embsysS20.h **** /**********************INCLUDES*****************/
+  17:src/embsysS20.h **** #include <errno.h>
+  18:src/embsysS20.h **** #include <stdio.h>
+  19:src/embsysS20.h **** #include <unistd.h>
+  20:src/embsysS20.h **** #include <libopencm3/stm32/rcc.h>
+  21:src/embsysS20.h **** #include <libopencm3/stm32/gpio.h>
+  22:src/embsysS20.h **** #include <libopencm3/stm32/usart.h>
+  23:src/embsysS20.h **** #include <libopencm3/stm32/timer.h>
+  24:src/embsysS20.h **** #include <libopencm3/cm3/nvic.h>
+  25:src/embsysS20.h **** 
+  26:src/embsysS20.h **** 
+  27:src/embsysS20.h **** // All LED 2 Defines
+  28:src/embsysS20.h **** #define     LD2_PORT        GPIOA
+  29:src/embsysS20.h **** #define     LD2_PIN         GPIO5
+  30:src/embsysS20.h **** #define     LD2_RCC         RCC_GPIOA
+  31:src/embsysS20.h **** 
+  32:src/embsysS20.h **** // All Button 1 Defines
+  33:src/embsysS20.h **** #define     B1_PORT         GPIOC
+  34:src/embsysS20.h **** #define     B1_PIN          GPIO13
+  35:src/embsysS20.h **** #define     B1_RCC          RCC_GPIOC
+  36:src/embsysS20.h **** 
+  37:src/embsysS20.h **** 
+  38:src/embsysS20.h **** // Functions
+  39:src/embsysS20.h **** 
+  40:src/embsysS20.h **** //LED2 interaction functions; Set, Clear, and Toggle
+  41:src/embsysS20.h **** #define TURN_ON_LD2 gpio_set(LD2_PORT, LD2_PIN)
+  42:src/embsysS20.h **** #define TURN_OFF_LD2 gpio_clear(LD2_PORT, LD2_PIN)
+ARM GAS  build/m2a.s 			page 7
+
+
+  43:src/embsysS20.h **** #define TOGGLE_LD2 gpio_toggle(LD2_PORT, LD2_PIN)
+  44:src/embsysS20.h **** 
+  45:src/embsysS20.h **** //LED2 status functions; Check if on and check if off
+  46:src/embsysS20.h **** #define IS_LD2_SET gpio_get(LD2_PORT, LD2_PIN)
+  47:src/embsysS20.h **** #define IS_LD2_RESET !gpio_get(LD2_PORT, LD2_PIN)
+  48:src/embsysS20.h **** 
+  49:src/embsysS20.h **** //Button 1 status functions; Check if pressed and check if off
+  50:src/embsysS20.h **** #define IS_B1_PRESSED !gpio_get(B1_PORT, B1_PIN)
+  51:src/embsysS20.h **** #define IS_B1_RELEASED gpio_get(B1_PORT, B1_PIN)
+  52:src/embsysS20.h **** 
+  53:src/embsysS20.h **** static void clock_enable(void){
+ 206              		.loc 3 53 31 is_stmt 1 view -0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 10B5     		push	{r4, lr}
+ 211              	.LCFI2:
+ 212              		.cfi_def_cfa_offset 8
+ 213              		.cfi_offset 4, -8
+ 214              		.cfi_offset 14, -4
+ 215 0002 82B0     		sub	sp, sp, #8
+ 216              	.LCFI3:
+ 217              		.cfi_def_cfa_offset 16
+  54:src/embsysS20.h **** 
+  55:src/embsysS20.h ****     rcc_osc_on(RCC_HSI16);
+ 218              		.loc 3 55 5 view .LVU50
+ 219 0004 0220     		movs	r0, #2
+ 220 0006 FFF7FEFF 		bl	rcc_osc_on
+ 221              	.LVL6:
+  56:src/embsysS20.h ****   //main clock initializtion to 40MHz
+  57:src/embsysS20.h **** 	/* 16MHz / 4 = > 4 * 20 = 80MHz / 2 = VCO => 40MHz main pll  */
+  58:src/embsysS20.h **** 	rcc_set_main_pll(RCC_PLLCFGR_PLLSRC_HSI16, 4, 20, 0, 0, RCC_PLLCFGR_PLLR_DIV2);
+ 222              		.loc 3 58 2 view .LVU51
+ 223 000a 0024     		movs	r4, #0
+ 224 000c 0194     		str	r4, [sp, #4]
+ 225 000e 0094     		str	r4, [sp]
+ 226 0010 2346     		mov	r3, r4
+ 227 0012 1422     		movs	r2, #20
+ 228 0014 0421     		movs	r1, #4
+ 229 0016 0220     		movs	r0, #2
+ 230 0018 FFF7FEFF 		bl	rcc_set_main_pll
+ 231              	.LVL7:
+  59:src/embsysS20.h **** 	rcc_osc_on(RCC_PLL);
+ 232              		.loc 3 59 2 view .LVU52
+ 233 001c 2046     		mov	r0, r4
+ 234 001e FFF7FEFF 		bl	rcc_osc_on
+ 235              	.LVL8:
+  60:src/embsysS20.h **** }
+ 236              		.loc 3 60 1 is_stmt 0 view .LVU53
+ 237 0022 02B0     		add	sp, sp, #8
+ 238              	.LCFI4:
+ 239              		.cfi_def_cfa_offset 8
+ 240              		@ sp needed
+ 241 0024 10BD     		pop	{r4, pc}
+ 242              		.cfi_endproc
+ 243              	.LFE13:
+ 245              		.section	.text.usart_setup,"ax",%progbits
+ARM GAS  build/m2a.s 			page 8
+
+
+ 246              		.align	1
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 251              	usart_setup:
+ 252              	.LFB19:
+   1:src/m2a.c     **** // HINT for TASK #2 -- FALL 2022
+   2:src/m2a.c     **** 
+   3:src/m2a.c     **** 
+   4:src/m2a.c     **** //************** I N C L U D E S *****************
+   5:src/m2a.c     **** 
+   6:src/m2a.c     ****        //PUT YOUR INCLUDES HERE
+   7:src/m2a.c     ****       #include <stdio.h>
+   8:src/m2a.c     ****       #include <string.h>
+   9:src/m2a.c     ****       #include <unistd.h>
+  10:src/m2a.c     ****       #include "circbuffer.h"
+  11:src/m2a.c     ****       #include "embsysS20.h"
+  12:src/m2a.c     **** 
+  13:src/m2a.c     **** 
+  14:src/m2a.c     **** //************** G L O B A L S *****************
+  15:src/m2a.c     **** 
+  16:src/m2a.c     ****       // PUT YOUR GLOBAL VARIABLES HERE
+  17:src/m2a.c     ****       const char key[21]= {'B', 'O' , 'L', 'D', 'F', 'E', 'A', 'R', 'L', 'E', 'S', 'S', 'C', 'O', '
+  18:src/m2a.c     ****       const int max = 1024;
+  19:src/m2a.c     **** //********* S U P P O R T     F U N C T I O N S *****************
+  20:src/m2a.c     **** 
+  21:src/m2a.c     ****       // any functions created to help out the bigger fcns below
+  22:src/m2a.c     **** //Available on the libopencm3 github example page
+  23:src/m2a.c     **** //Makes the USART2 port the STDOUT stream
+  24:src/m2a.c     **** int _write(int file, char* ptr, int len){
+  25:src/m2a.c     ****     int i;
+  26:src/m2a.c     **** 
+  27:src/m2a.c     ****     if (file == STDOUT_FILENO || file == STDERR_FILENO){
+  28:src/m2a.c     **** 	    for(i = 0; i < len; i++){
+  29:src/m2a.c     **** 		    if(ptr[i] == '\n')
+  30:src/m2a.c     **** 			    usart_send_blocking(USART2, '\r');
+  31:src/m2a.c     **** 
+  32:src/m2a.c     **** 		    usart_send_blocking(USART2, ptr[i]);
+  33:src/m2a.c     **** 	    }
+  34:src/m2a.c     **** 
+  35:src/m2a.c     **** 	    return i;
+  36:src/m2a.c     ****     }
+  37:src/m2a.c     **** 
+  38:src/m2a.c     ****     errno = EIO;
+  39:src/m2a.c     ****     return -1;
+  40:src/m2a.c     **** }
+  41:src/m2a.c     **** //Converts input to caps
+  42:src/m2a.c     **** void convertCaps(char* toConvert){
+  43:src/m2a.c     ****    if(*toConvert >= 'a' && *toConvert <= 'z')
+  44:src/m2a.c     ****       *toConvert = (*toConvert - 'a') + 'A';
+  45:src/m2a.c     **** }
+  46:src/m2a.c     **** //Encrypts with Vigenere cipher using 'key'
+  47:src/m2a.c     **** char encrypt(char toEncrypt){
+  48:src/m2a.c     ****    static uint8_t pos = 0;
+  49:src/m2a.c     ****    
+  50:src/m2a.c     ****    toEncrypt = ((toEncrypt + key[pos]) % 26) + 'A';
+  51:src/m2a.c     ****    ++pos;
+ARM GAS  build/m2a.s 			page 9
+
+
+  52:src/m2a.c     **** 
+  53:src/m2a.c     ****    pos = (pos == 21) ? 0 : pos;
+  54:src/m2a.c     **** 
+  55:src/m2a.c     ****    return toEncrypt;
+  56:src/m2a.c     **** }
+  57:src/m2a.c     **** //Decrypts with Vigenere cipher using 'key'
+  58:src/m2a.c     **** char decrypt(char toDecrypt){
+  59:src/m2a.c     ****    static uint8_t pos = 0;
+  60:src/m2a.c     **** 
+  61:src/m2a.c     ****    toDecrypt = ((toDecrypt - key[pos] + 26) % 26) + 'A';
+  62:src/m2a.c     ****    ++pos;
+  63:src/m2a.c     **** 
+  64:src/m2a.c     ****    pos = (pos == 21) ? 0 : pos;
+  65:src/m2a.c     **** 
+  66:src/m2a.c     ****    return toDecrypt;
+  67:src/m2a.c     **** }
+  68:src/m2a.c     **** //Basic delay loop
+  69:src/m2a.c     **** static void delay_loop(uint32_t loops)
+  70:src/m2a.c     **** {
+  71:src/m2a.c     ****     while(loops > 0)
+  72:src/m2a.c     ****     {
+  73:src/m2a.c     ****        asm("nop");
+  74:src/m2a.c     ****        loops--;
+  75:src/m2a.c     ****     }
+  76:src/m2a.c     **** }
+  77:src/m2a.c     **** 
+  78:src/m2a.c     **** //********* I N I T I A L I Z A T I O N *****************
+  79:src/m2a.c     **** static void usart_setup(void)
+  80:src/m2a.c     **** {
+ 253              		.loc 1 80 1 is_stmt 1 view -0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257 0000 10B5     		push	{r4, lr}
+ 258              	.LCFI5:
+ 259              		.cfi_def_cfa_offset 8
+ 260              		.cfi_offset 4, -8
+ 261              		.cfi_offset 14, -4
+  81:src/m2a.c     ****    /* DO NOT USE INTERRUPTS IN THIS DESIGN */
+  82:src/m2a.c     ****    rcc_periph_clock_enable(RCC_GPIOA);
+ 262              		.loc 1 82 4 view .LVU55
+ 263 0002 4FF41860 		mov	r0, #2432
+ 264 0006 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 265              	.LVL9:
+  83:src/m2a.c     ****    rcc_periph_clock_enable(RCC_USART2);
+ 266              		.loc 1 83 4 view .LVU56
+ 267 000a 40F61130 		movw	r0, #2833
+ 268 000e FFF7FEFF 		bl	rcc_periph_clock_enable
+ 269              	.LVL10:
+  84:src/m2a.c     **** 
+  85:src/m2a.c     ****    /* Setup GPIO pins for USART */
+  86:src/m2a.c     ****    //Transmit
+  87:src/m2a.c     **** 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO2);
+ 270              		.loc 1 87 2 view .LVU57
+ 271 0012 0423     		movs	r3, #4
+ 272 0014 0022     		movs	r2, #0
+ 273 0016 0221     		movs	r1, #2
+ARM GAS  build/m2a.s 			page 10
+
+
+ 274 0018 4FF09040 		mov	r0, #1207959552
+ 275 001c FFF7FEFF 		bl	gpio_mode_setup
+ 276              	.LVL11:
+  88:src/m2a.c     ****    //Recieve
+  89:src/m2a.c     ****    gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3);   
+ 277              		.loc 1 89 4 view .LVU58
+ 278 0020 0823     		movs	r3, #8
+ 279 0022 0022     		movs	r2, #0
+ 280 0024 0221     		movs	r1, #2
+ 281 0026 4FF09040 		mov	r0, #1207959552
+ 282 002a FFF7FEFF 		bl	gpio_mode_setup
+ 283              	.LVL12:
+  90:src/m2a.c     ****    gpio_set_output_options(GPIOA, GPIO_OTYPE_OD, GPIO_OSPEED_25MHZ, GPIO3);	
+ 284              		.loc 1 90 4 view .LVU59
+ 285 002e 0823     		movs	r3, #8
+ 286 0030 0122     		movs	r2, #1
+ 287 0032 1146     		mov	r1, r2
+ 288 0034 4FF09040 		mov	r0, #1207959552
+ 289 0038 FFF7FEFF 		bl	gpio_set_output_options
+ 290              	.LVL13:
+  91:src/m2a.c     **** 
+  92:src/m2a.c     ****    /* Setup USART pins as alternate function. */
+  93:src/m2a.c     **** 	gpio_set_af(GPIOA, GPIO_AF7, GPIO2);
+ 291              		.loc 1 93 2 view .LVU60
+ 292 003c 0422     		movs	r2, #4
+ 293 003e 0721     		movs	r1, #7
+ 294 0040 4FF09040 		mov	r0, #1207959552
+ 295 0044 FFF7FEFF 		bl	gpio_set_af
+ 296              	.LVL14:
+  94:src/m2a.c     ****    gpio_set_af(GPIOA, GPIO_AF7, GPIO3);
+ 297              		.loc 1 94 4 view .LVU61
+ 298 0048 0822     		movs	r2, #8
+ 299 004a 0721     		movs	r1, #7
+ 300 004c 4FF09040 		mov	r0, #1207959552
+ 301 0050 FFF7FEFF 		bl	gpio_set_af
+ 302              	.LVL15:
+  95:src/m2a.c     ****     
+  96:src/m2a.c     **** 
+  97:src/m2a.c     **** 	/* Setup UART parameters. */
+  98:src/m2a.c     **** 	usart_set_baudrate(USART2, 57600);
+ 303              		.loc 1 98 2 view .LVU62
+ 304 0054 0F4C     		ldr	r4, .L23
+ 305 0056 4FF46141 		mov	r1, #57600
+ 306 005a 2046     		mov	r0, r4
+ 307 005c FFF7FEFF 		bl	usart_set_baudrate
+ 308              	.LVL16:
+  99:src/m2a.c     **** 	usart_set_databits(USART2, 9);  // check the effect of parity on this fcn.
+ 309              		.loc 1 99 2 view .LVU63
+ 310 0060 0921     		movs	r1, #9
+ 311 0062 2046     		mov	r0, r4
+ 312 0064 FFF7FEFF 		bl	usart_set_databits
+ 313              	.LVL17:
+ 100:src/m2a.c     **** 	usart_set_stopbits(USART2,USART_STOPBITS_1);
+ 314              		.loc 1 100 2 view .LVU64
+ 315 0068 0021     		movs	r1, #0
+ 316 006a 2046     		mov	r0, r4
+ 317 006c FFF7FEFF 		bl	usart_set_stopbits
+ARM GAS  build/m2a.s 			page 11
+
+
+ 318              	.LVL18:
+ 101:src/m2a.c     **** 	usart_set_mode(USART2, USART_MODE_TX_RX);
+ 319              		.loc 1 101 2 view .LVU65
+ 320 0070 0C21     		movs	r1, #12
+ 321 0072 2046     		mov	r0, r4
+ 322 0074 FFF7FEFF 		bl	usart_set_mode
+ 323              	.LVL19:
+ 102:src/m2a.c     **** 	usart_set_parity(USART2, USART_PARITY_ODD);
+ 324              		.loc 1 102 2 view .LVU66
+ 325 0078 4FF4C061 		mov	r1, #1536
+ 326 007c 2046     		mov	r0, r4
+ 327 007e FFF7FEFF 		bl	usart_set_parity
+ 328              	.LVL20:
+ 103:src/m2a.c     **** 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
+ 329              		.loc 1 103 2 view .LVU67
+ 330 0082 0021     		movs	r1, #0
+ 331 0084 2046     		mov	r0, r4
+ 332 0086 FFF7FEFF 		bl	usart_set_flow_control
+ 333              	.LVL21:
+ 104:src/m2a.c     **** 
+ 105:src/m2a.c     **** 
+ 106:src/m2a.c     **** 
+ 107:src/m2a.c     ****    usart_enable(USART2);
+ 334              		.loc 1 107 4 view .LVU68
+ 335 008a 2046     		mov	r0, r4
+ 336 008c FFF7FEFF 		bl	usart_enable
+ 337              	.LVL22:
+ 108:src/m2a.c     **** 
+ 109:src/m2a.c     **** }
+ 338              		.loc 1 109 1 is_stmt 0 view .LVU69
+ 339 0090 10BD     		pop	{r4, pc}
+ 340              	.L24:
+ 341 0092 00BF     		.align	2
+ 342              	.L23:
+ 343 0094 00440040 		.word	1073759232
+ 344              		.cfi_endproc
+ 345              	.LFE19:
+ 347              		.section	.text.timer_setup,"ax",%progbits
+ 348              		.align	1
+ 349              		.syntax unified
+ 350              		.thumb
+ 351              		.thumb_func
+ 353              	timer_setup:
+ 354              	.LFB20:
+ 110:src/m2a.c     **** 
+ 111:src/m2a.c     **** static void timer_setup(void)
+ 112:src/m2a.c     **** {
+ 355              		.loc 1 112 1 is_stmt 1 view -0
+ 356              		.cfi_startproc
+ 357              		@ args = 0, pretend = 0, frame = 0
+ 358              		@ frame_needed = 0, uses_anonymous_args = 0
+ 359 0000 08B5     		push	{r3, lr}
+ 360              	.LCFI6:
+ 361              		.cfi_def_cfa_offset 8
+ 362              		.cfi_offset 3, -8
+ 363              		.cfi_offset 14, -4
+ 113:src/m2a.c     ****    /* DO NOT USE INTERRUPTS IN THIS DESIGN */
+ARM GAS  build/m2a.s 			page 12
+
+
+ 114:src/m2a.c     ****    rcc_periph_clock_enable(RCC_TIM2);
+ 364              		.loc 1 114 4 view .LVU71
+ 365 0002 4FF43060 		mov	r0, #2816
+ 366 0006 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 367              	.LVL23:
+ 115:src/m2a.c     ****    rcc_periph_reset_pulse(RST_TIM2);
+ 368              		.loc 1 115 4 view .LVU72
+ 369 000a 4FF4E060 		mov	r0, #1792
+ 370 000e FFF7FEFF 		bl	rcc_periph_reset_pulse
+ 371              	.LVL24:
+ 116:src/m2a.c     **** 
+ 117:src/m2a.c     ****    /* Setup timer parameters. */
+ 118:src/m2a.c     ****    // timer_set_mode(TIM2, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
+ 119:src/m2a.c     **** 
+ 120:src/m2a.c     ****    timer_set_prescaler(TIM2, 200);
+ 372              		.loc 1 120 4 view .LVU73
+ 373 0012 C821     		movs	r1, #200
+ 374 0014 4FF08040 		mov	r0, #1073741824
+ 375 0018 FFF7FEFF 		bl	timer_set_prescaler
+ 376              	.LVL25:
+ 121:src/m2a.c     ****    
+ 122:src/m2a.c     ****    timer_set_period(TIM2, 10000);
+ 377              		.loc 1 122 4 view .LVU74
+ 378 001c 42F21071 		movw	r1, #10000
+ 379 0020 4FF08040 		mov	r0, #1073741824
+ 380 0024 FFF7FEFF 		bl	timer_set_period
+ 381              	.LVL26:
+ 123:src/m2a.c     ****    timer_enable_counter(TIM2);
+ 382              		.loc 1 123 4 view .LVU75
+ 383 0028 4FF08040 		mov	r0, #1073741824
+ 384 002c FFF7FEFF 		bl	timer_enable_counter
+ 385              	.LVL27:
+ 124:src/m2a.c     **** 
+ 125:src/m2a.c     **** }
+ 386              		.loc 1 125 1 is_stmt 0 view .LVU76
+ 387 0030 08BD     		pop	{r3, pc}
+ 388              		.cfi_endproc
+ 389              	.LFE20:
+ 391              		.section	.text.circbuffer_reset,"ax",%progbits
+ 392              		.align	1
+ 393              		.global	circbuffer_reset
+ 394              		.syntax unified
+ 395              		.thumb
+ 396              		.thumb_func
+ 398              	circbuffer_reset:
+ 399              	.LVL28:
+ 400              	.LFB3:
+  15:src/circbuffer.h ****     assert(myBuff);
+ 401              		.loc 2 15 42 is_stmt 1 view -0
+ 402              		.cfi_startproc
+ 403              		@ args = 0, pretend = 0, frame = 0
+ 404              		@ frame_needed = 0, uses_anonymous_args = 0
+  15:src/circbuffer.h ****     assert(myBuff);
+ 405              		.loc 2 15 42 is_stmt 0 view .LVU78
+ 406 0000 08B5     		push	{r3, lr}
+ 407              	.LCFI7:
+ 408              		.cfi_def_cfa_offset 8
+ARM GAS  build/m2a.s 			page 13
+
+
+ 409              		.cfi_offset 3, -8
+ 410              		.cfi_offset 14, -4
+  16:src/circbuffer.h **** 
+ 411              		.loc 2 16 4 is_stmt 1 view .LVU79
+  16:src/circbuffer.h **** 
+ 412              		.loc 2 16 16 is_stmt 0 view .LVU80
+ 413 0002 20B1     		cbz	r0, .L30
+  18:src/circbuffer.h ****     myBuff->tailIndex = 0;
+ 414              		.loc 2 18 5 is_stmt 1 view .LVU81
+  18:src/circbuffer.h ****     myBuff->tailIndex = 0;
+ 415              		.loc 2 18 23 is_stmt 0 view .LVU82
+ 416 0004 0022     		movs	r2, #0
+ 417 0006 0271     		strb	r2, [r0, #4]
+  19:src/circbuffer.h ****     myBuff->isFull = false;
+ 418              		.loc 2 19 5 is_stmt 1 view .LVU83
+  19:src/circbuffer.h ****     myBuff->isFull = false;
+ 419              		.loc 2 19 23 is_stmt 0 view .LVU84
+ 420 0008 4271     		strb	r2, [r0, #5]
+  20:src/circbuffer.h **** }
+ 421              		.loc 2 20 5 is_stmt 1 view .LVU85
+  20:src/circbuffer.h **** }
+ 422              		.loc 2 20 20 is_stmt 0 view .LVU86
+ 423 000a 8271     		strb	r2, [r0, #6]
+  21:src/circbuffer.h **** 
+ 424              		.loc 2 21 1 view .LVU87
+ 425 000c 08BD     		pop	{r3, pc}
+ 426              	.L30:
+  16:src/circbuffer.h **** 
+ 427              		.loc 2 16 18 discriminator 1 view .LVU88
+ 428 000e 034B     		ldr	r3, .L31
+ 429 0010 034A     		ldr	r2, .L31+4
+ 430 0012 1021     		movs	r1, #16
+ 431 0014 0348     		ldr	r0, .L31+8
+ 432              	.LVL29:
+  16:src/circbuffer.h **** 
+ 433              		.loc 2 16 18 discriminator 1 view .LVU89
+ 434 0016 FFF7FEFF 		bl	__assert_func
+ 435              	.LVL30:
+ 436              	.L32:
+ 437 001a 00BF     		.align	2
+ 438              	.L31:
+ 439 001c 00000000 		.word	.LC0
+ 440 0020 00000000 		.word	__func__.13
+ 441 0024 08000000 		.word	.LC1
+ 442              		.cfi_endproc
+ 443              	.LFE3:
+ 445              		.section	.text.bufferIsEmpty,"ax",%progbits
+ 446              		.align	1
+ 447              		.global	bufferIsEmpty
+ 448              		.syntax unified
+ 449              		.thumb
+ 450              		.thumb_func
+ 452              	bufferIsEmpty:
+ 453              	.LVL31:
+ 454              	.LFB4:
+  23:src/circbuffer.h ****     assert(myBuff);
+ 455              		.loc 2 23 39 is_stmt 1 view -0
+ARM GAS  build/m2a.s 			page 14
+
+
+ 456              		.cfi_startproc
+ 457              		@ args = 0, pretend = 0, frame = 0
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+  23:src/circbuffer.h ****     assert(myBuff);
+ 459              		.loc 2 23 39 is_stmt 0 view .LVU91
+ 460 0000 08B5     		push	{r3, lr}
+ 461              	.LCFI8:
+ 462              		.cfi_def_cfa_offset 8
+ 463              		.cfi_offset 3, -8
+ 464              		.cfi_offset 14, -4
+  24:src/circbuffer.h **** 
+ 465              		.loc 2 24 4 is_stmt 1 view .LVU92
+  24:src/circbuffer.h **** 
+ 466              		.loc 2 24 16 is_stmt 0 view .LVU93
+ 467 0002 38B1     		cbz	r0, .L39
+  26:src/circbuffer.h **** }
+ 468              		.loc 2 26 5 is_stmt 1 view .LVU94
+  26:src/circbuffer.h **** }
+ 469              		.loc 2 26 19 is_stmt 0 view .LVU95
+ 470 0004 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+  26:src/circbuffer.h **** }
+ 471              		.loc 2 26 28 view .LVU96
+ 472 0006 5AB9     		cbnz	r2, .L36
+  26:src/circbuffer.h **** }
+ 473              		.loc 2 26 38 discriminator 1 view .LVU97
+ 474 0008 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+  26:src/circbuffer.h **** }
+ 475              		.loc 2 26 59 discriminator 1 view .LVU98
+ 476 000a 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+  26:src/circbuffer.h **** }
+ 477              		.loc 2 26 28 discriminator 1 view .LVU99
+ 478 000c 9A42     		cmp	r2, r3
+ 479 000e 09D0     		beq	.L37
+  26:src/circbuffer.h **** }
+ 480              		.loc 2 26 28 view .LVU100
+ 481 0010 0020     		movs	r0, #0
+ 482              	.LVL32:
+  26:src/circbuffer.h **** }
+ 483              		.loc 2 26 28 view .LVU101
+ 484 0012 06E0     		b	.L35
+ 485              	.LVL33:
+ 486              	.L39:
+  24:src/circbuffer.h **** 
+ 487              		.loc 2 24 18 discriminator 1 view .LVU102
+ 488 0014 044B     		ldr	r3, .L40
+ 489 0016 054A     		ldr	r2, .L40+4
+ 490 0018 1821     		movs	r1, #24
+ 491 001a 0548     		ldr	r0, .L40+8
+ 492              	.LVL34:
+  24:src/circbuffer.h **** 
+ 493              		.loc 2 24 18 discriminator 1 view .LVU103
+ 494 001c FFF7FEFF 		bl	__assert_func
+ 495              	.LVL35:
+ 496              	.L36:
+  26:src/circbuffer.h **** }
+ 497              		.loc 2 26 28 view .LVU104
+ 498 0020 0020     		movs	r0, #0
+ARM GAS  build/m2a.s 			page 15
+
+
+ 499              	.LVL36:
+ 500              	.L35:
+  27:src/circbuffer.h **** 
+ 501              		.loc 2 27 1 discriminator 6 view .LVU105
+ 502 0022 08BD     		pop	{r3, pc}
+ 503              	.LVL37:
+ 504              	.L37:
+  26:src/circbuffer.h **** }
+ 505              		.loc 2 26 28 view .LVU106
+ 506 0024 0120     		movs	r0, #1
+ 507              	.LVL38:
+  26:src/circbuffer.h **** }
+ 508              		.loc 2 26 28 view .LVU107
+ 509 0026 FCE7     		b	.L35
+ 510              	.L41:
+ 511              		.align	2
+ 512              	.L40:
+ 513 0028 00000000 		.word	.LC0
+ 514 002c 00000000 		.word	__func__.12
+ 515 0030 08000000 		.word	.LC1
+ 516              		.cfi_endproc
+ 517              	.LFE4:
+ 519              		.section	.rodata.circbuffer_init.str1.4,"aMS",%progbits,1
+ 520              		.align	2
+ 521              	.LC2:
+ 522 0000 6D794275 		.ascii	"myBuff && buff && size\000"
+ 522      66662026 
+ 522      26206275 
+ 522      66662026 
+ 522      26207369 
+ 523 0017 00       		.align	2
+ 524              	.LC3:
+ 525 0018 62756666 		.ascii	"bufferIsEmpty(myBuff)\000"
+ 525      65724973 
+ 525      456D7074 
+ 525      79286D79 
+ 525      42756666 
+ 526              		.section	.text.circbuffer_init,"ax",%progbits
+ 527              		.align	1
+ 528              		.global	circbuffer_init
+ 529              		.syntax unified
+ 530              		.thumb
+ 531              		.thumb_func
+ 533              	circbuffer_init:
+ 534              	.LVL39:
+ 535              	.LFB5:
+  29:src/circbuffer.h ****     assert(myBuff && buff && size);
+ 536              		.loc 2 29 63 is_stmt 1 view -0
+ 537              		.cfi_startproc
+ 538              		@ args = 0, pretend = 0, frame = 0
+ 539              		@ frame_needed = 0, uses_anonymous_args = 0
+  29:src/circbuffer.h ****     assert(myBuff && buff && size);
+ 540              		.loc 2 29 63 is_stmt 0 view .LVU109
+ 541 0000 10B5     		push	{r4, lr}
+ 542              	.LCFI9:
+ 543              		.cfi_def_cfa_offset 8
+ 544              		.cfi_offset 4, -8
+ARM GAS  build/m2a.s 			page 16
+
+
+ 545              		.cfi_offset 14, -4
+  30:src/circbuffer.h ****     
+ 546              		.loc 2 30 4 is_stmt 1 view .LVU110
+  30:src/circbuffer.h ****     
+ 547              		.loc 2 30 16 is_stmt 0 view .LVU111
+ 548 0002 58B1     		cbz	r0, .L43
+ 549 0004 0446     		mov	r4, r0
+  30:src/circbuffer.h ****     
+ 550              		.loc 2 30 11 discriminator 2 view .LVU112
+ 551 0006 49B1     		cbz	r1, .L43
+  30:src/circbuffer.h ****     
+ 552              		.loc 2 30 19 discriminator 4 view .LVU113
+ 553 0008 42B1     		cbz	r2, .L43
+  32:src/circbuffer.h ****     myBuff->max = size;
+ 554              		.loc 2 32 5 is_stmt 1 view .LVU114
+  32:src/circbuffer.h ****     myBuff->max = size;
+ 555              		.loc 2 32 20 is_stmt 0 view .LVU115
+ 556 000a 0160     		str	r1, [r0]
+  33:src/circbuffer.h ****     circbuffer_reset(myBuff);
+ 557              		.loc 2 33 5 is_stmt 1 view .LVU116
+  33:src/circbuffer.h ****     circbuffer_reset(myBuff);
+ 558              		.loc 2 33 17 is_stmt 0 view .LVU117
+ 559 000c C271     		strb	r2, [r0, #7]
+  34:src/circbuffer.h **** 
+ 560              		.loc 2 34 5 is_stmt 1 view .LVU118
+ 561 000e FFF7FEFF 		bl	circbuffer_reset
+ 562              	.LVL40:
+  36:src/circbuffer.h **** }
+ 563              		.loc 2 36 4 view .LVU119
+  36:src/circbuffer.h **** }
+ 564              		.loc 2 36 4 is_stmt 0 view .LVU120
+ 565 0012 2046     		mov	r0, r4
+ 566 0014 FFF7FEFF 		bl	bufferIsEmpty
+ 567              	.LVL41:
+  36:src/circbuffer.h **** }
+ 568              		.loc 2 36 16 view .LVU121
+ 569 0018 30B1     		cbz	r0, .L47
+  37:src/circbuffer.h **** 
+ 570              		.loc 2 37 1 view .LVU122
+ 571 001a 10BD     		pop	{r4, pc}
+ 572              	.LVL42:
+ 573              	.L43:
+  30:src/circbuffer.h ****     
+ 574              		.loc 2 30 18 discriminator 5 view .LVU123
+ 575 001c 054B     		ldr	r3, .L48
+ 576 001e 064A     		ldr	r2, .L48+4
+ 577              	.LVL43:
+  30:src/circbuffer.h ****     
+ 578              		.loc 2 30 18 discriminator 5 view .LVU124
+ 579 0020 1E21     		movs	r1, #30
+ 580              	.LVL44:
+  30:src/circbuffer.h ****     
+ 581              		.loc 2 30 18 discriminator 5 view .LVU125
+ 582 0022 0648     		ldr	r0, .L48+8
+ 583              	.LVL45:
+  30:src/circbuffer.h ****     
+ 584              		.loc 2 30 18 discriminator 5 view .LVU126
+ARM GAS  build/m2a.s 			page 17
+
+
+ 585 0024 FFF7FEFF 		bl	__assert_func
+ 586              	.LVL46:
+ 587              	.L47:
+  36:src/circbuffer.h **** }
+ 588              		.loc 2 36 18 discriminator 1 view .LVU127
+ 589 0028 054B     		ldr	r3, .L48+12
+ 590 002a 034A     		ldr	r2, .L48+4
+ 591 002c 2421     		movs	r1, #36
+ 592 002e 0348     		ldr	r0, .L48+8
+ 593 0030 FFF7FEFF 		bl	__assert_func
+ 594              	.LVL47:
+ 595              	.L49:
+ 596              		.align	2
+ 597              	.L48:
+ 598 0034 00000000 		.word	.LC2
+ 599 0038 00000000 		.word	__func__.11
+ 600 003c 08000000 		.word	.LC1
+ 601 0040 18000000 		.word	.LC3
+ 602              		.cfi_endproc
+ 603              	.LFE5:
+ 605              		.section	.text.bufferIsFull,"ax",%progbits
+ 606              		.align	1
+ 607              		.global	bufferIsFull
+ 608              		.syntax unified
+ 609              		.thumb
+ 610              		.thumb_func
+ 612              	bufferIsFull:
+ 613              	.LVL48:
+ 614              	.LFB6:
+  39:src/circbuffer.h ****     assert(myBuff);
+ 615              		.loc 2 39 37 is_stmt 1 view -0
+ 616              		.cfi_startproc
+ 617              		@ args = 0, pretend = 0, frame = 0
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+  39:src/circbuffer.h ****     assert(myBuff);
+ 619              		.loc 2 39 37 is_stmt 0 view .LVU129
+ 620 0000 08B5     		push	{r3, lr}
+ 621              	.LCFI10:
+ 622              		.cfi_def_cfa_offset 8
+ 623              		.cfi_offset 3, -8
+ 624              		.cfi_offset 14, -4
+  40:src/circbuffer.h ****     return myBuff->isFull;
+ 625              		.loc 2 40 4 is_stmt 1 view .LVU130
+  40:src/circbuffer.h ****     return myBuff->isFull;
+ 626              		.loc 2 40 16 is_stmt 0 view .LVU131
+ 627 0002 08B1     		cbz	r0, .L53
+  41:src/circbuffer.h **** }
+ 628              		.loc 2 41 5 is_stmt 1 view .LVU132
+  42:src/circbuffer.h **** 
+ 629              		.loc 2 42 1 is_stmt 0 view .LVU133
+ 630 0004 8079     		ldrb	r0, [r0, #6]	@ zero_extendqisi2
+ 631              	.LVL49:
+  42:src/circbuffer.h **** 
+ 632              		.loc 2 42 1 view .LVU134
+ 633 0006 08BD     		pop	{r3, pc}
+ 634              	.LVL50:
+ 635              	.L53:
+ARM GAS  build/m2a.s 			page 18
+
+
+  40:src/circbuffer.h ****     return myBuff->isFull;
+ 636              		.loc 2 40 18 discriminator 1 view .LVU135
+ 637 0008 024B     		ldr	r3, .L54
+ 638 000a 034A     		ldr	r2, .L54+4
+ 639 000c 2821     		movs	r1, #40
+ 640 000e 0348     		ldr	r0, .L54+8
+ 641              	.LVL51:
+  40:src/circbuffer.h ****     return myBuff->isFull;
+ 642              		.loc 2 40 18 discriminator 1 view .LVU136
+ 643 0010 FFF7FEFF 		bl	__assert_func
+ 644              	.LVL52:
+ 645              	.L55:
+ 646              		.align	2
+ 647              	.L54:
+ 648 0014 00000000 		.word	.LC0
+ 649 0018 00000000 		.word	__func__.10
+ 650 001c 08000000 		.word	.LC1
+ 651              		.cfi_endproc
+ 652              	.LFE6:
+ 654              		.section	.text.circbuff_entries,"ax",%progbits
+ 655              		.align	1
+ 656              		.global	circbuff_entries
+ 657              		.syntax unified
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	circbuff_entries:
+ 662              	.LVL53:
+ 663              	.LFB7:
+  44:src/circbuffer.h ****     assert(myBuff);
+ 664              		.loc 2 44 45 is_stmt 1 view -0
+ 665              		.cfi_startproc
+ 666              		@ args = 0, pretend = 0, frame = 0
+ 667              		@ frame_needed = 0, uses_anonymous_args = 0
+  44:src/circbuffer.h ****     assert(myBuff);
+ 668              		.loc 2 44 45 is_stmt 0 view .LVU138
+ 669 0000 08B5     		push	{r3, lr}
+ 670              	.LCFI11:
+ 671              		.cfi_def_cfa_offset 8
+ 672              		.cfi_offset 3, -8
+ 673              		.cfi_offset 14, -4
+  45:src/circbuffer.h **** 
+ 674              		.loc 2 45 4 is_stmt 1 view .LVU139
+  45:src/circbuffer.h **** 
+ 675              		.loc 2 45 16 is_stmt 0 view .LVU140
+ 676 0002 50B1     		cbz	r0, .L61
+ 677 0004 0346     		mov	r3, r0
+  47:src/circbuffer.h **** 
+ 678              		.loc 2 47 2 is_stmt 1 view .LVU141
+  47:src/circbuffer.h **** 
+ 679              		.loc 2 47 10 is_stmt 0 view .LVU142
+ 680 0006 C079     		ldrb	r0, [r0, #7]	@ zero_extendqisi2
+ 681              	.LVL54:
+  49:src/circbuffer.h **** 	
+ 682              		.loc 2 49 2 is_stmt 1 view .LVU143
+  49:src/circbuffer.h **** 	
+ 683              		.loc 2 49 12 is_stmt 0 view .LVU144
+ 684 0008 9A79     		ldrb	r2, [r3, #6]	@ zero_extendqisi2
+ARM GAS  build/m2a.s 			page 19
+
+
+  49:src/circbuffer.h **** 	
+ 685              		.loc 2 49 4 view .LVU145
+ 686 000a 2AB9     		cbnz	r2, .L58
+  51:src/circbuffer.h **** 			size = myBuff->headIndex - myBuff->tailIndex;
+ 687              		.loc 2 51 6 is_stmt 1 view .LVU146
+  51:src/circbuffer.h **** 			size = myBuff->headIndex - myBuff->tailIndex;
+ 688              		.loc 2 51 15 is_stmt 0 view .LVU147
+ 689 000c 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+  51:src/circbuffer.h **** 			size = myBuff->headIndex - myBuff->tailIndex;
+ 690              		.loc 2 51 36 view .LVU148
+ 691 000e 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 692              	.LVL55:
+  51:src/circbuffer.h **** 			size = myBuff->headIndex - myBuff->tailIndex;
+ 693              		.loc 2 51 8 view .LVU149
+ 694 0010 9A42     		cmp	r2, r3
+ 695 0012 08D3     		bcc	.L59
+  52:src/circbuffer.h **** 		else
+ 696              		.loc 2 52 4 is_stmt 1 view .LVU150
+  52:src/circbuffer.h **** 		else
+ 697              		.loc 2 52 9 is_stmt 0 view .LVU151
+ 698 0014 D21A     		subs	r2, r2, r3
+ 699 0016 D0B2     		uxtb	r0, r2
+ 700              	.LVL56:
+ 701              	.L58:
+  57:src/circbuffer.h **** }
+ 702              		.loc 2 57 5 is_stmt 1 view .LVU152
+  58:src/circbuffer.h **** 
+ 703              		.loc 2 58 1 is_stmt 0 view .LVU153
+ 704 0018 08BD     		pop	{r3, pc}
+ 705              	.LVL57:
+ 706              	.L61:
+  45:src/circbuffer.h **** 
+ 707              		.loc 2 45 18 discriminator 1 view .LVU154
+ 708 001a 054B     		ldr	r3, .L62
+ 709 001c 054A     		ldr	r2, .L62+4
+ 710 001e 2D21     		movs	r1, #45
+ 711 0020 0548     		ldr	r0, .L62+8
+ 712              	.LVL58:
+  45:src/circbuffer.h **** 
+ 713              		.loc 2 45 18 discriminator 1 view .LVU155
+ 714 0022 FFF7FEFF 		bl	__assert_func
+ 715              	.LVL59:
+ 716              	.L59:
+  54:src/circbuffer.h **** 	}
+ 717              		.loc 2 54 4 is_stmt 1 view .LVU156
+  54:src/circbuffer.h **** 	}
+ 718              		.loc 2 54 23 is_stmt 0 view .LVU157
+ 719 0026 1044     		add	r0, r0, r2
+ 720              	.LVL60:
+  54:src/circbuffer.h **** 	}
+ 721              		.loc 2 54 23 view .LVU158
+ 722 0028 C0B2     		uxtb	r0, r0
+  54:src/circbuffer.h **** 	}
+ 723              		.loc 2 54 9 view .LVU159
+ 724 002a C01A     		subs	r0, r0, r3
+ 725 002c C0B2     		uxtb	r0, r0
+ 726              	.LVL61:
+ARM GAS  build/m2a.s 			page 20
+
+
+  54:src/circbuffer.h **** 	}
+ 727              		.loc 2 54 9 view .LVU160
+ 728 002e F3E7     		b	.L58
+ 729              	.L63:
+ 730              		.align	2
+ 731              	.L62:
+ 732 0030 00000000 		.word	.LC0
+ 733 0034 00000000 		.word	__func__.9
+ 734 0038 08000000 		.word	.LC1
+ 735              		.cfi_endproc
+ 736              	.LFE7:
+ 738              		.section	.rodata.circbuffer_queue.str1.4,"aMS",%progbits,1
+ 739              		.align	2
+ 740              	.LC4:
+ 741 0000 6D794275 		.ascii	"myBuff && myBuff->buffer\000"
+ 741      66662026 
+ 741      26206D79 
+ 741      42756666 
+ 741      2D3E6275 
+ 742              		.section	.text.circbuffer_queue,"ax",%progbits
+ 743              		.align	1
+ 744              		.global	circbuffer_queue
+ 745              		.syntax unified
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	circbuffer_queue:
+ 750              	.LVL62:
+ 751              	.LFB10:
+  86:src/circbuffer.h **** 
+  87:src/circbuffer.h **** void circbuffer_queue(circbuffer* myBuff, char data){
+ 752              		.loc 2 87 53 is_stmt 1 view -0
+ 753              		.cfi_startproc
+ 754              		@ args = 0, pretend = 0, frame = 0
+ 755              		@ frame_needed = 0, uses_anonymous_args = 0
+ 756              		.loc 2 87 53 is_stmt 0 view .LVU162
+ 757 0000 08B5     		push	{r3, lr}
+ 758              	.LCFI12:
+ 759              		.cfi_def_cfa_offset 8
+ 760              		.cfi_offset 3, -8
+ 761              		.cfi_offset 14, -4
+  88:src/circbuffer.h ****     assert(myBuff && myBuff->buffer);
+ 762              		.loc 2 88 4 is_stmt 1 view .LVU163
+ 763              		.loc 2 88 16 is_stmt 0 view .LVU164
+ 764 0002 40B1     		cbz	r0, .L65
+ 765 0004 0346     		mov	r3, r0
+ 766              		.loc 2 88 20 discriminator 2 view .LVU165
+ 767 0006 0268     		ldr	r2, [r0]
+ 768              		.loc 2 88 11 discriminator 2 view .LVU166
+ 769 0008 2AB1     		cbz	r2, .L65
+  89:src/circbuffer.h **** 
+  90:src/circbuffer.h ****     myBuff->buffer[myBuff->headIndex] = data;
+ 770              		.loc 2 90 5 is_stmt 1 view .LVU167
+ 771              		.loc 2 90 26 is_stmt 0 view .LVU168
+ 772 000a 0079     		ldrb	r0, [r0, #4]	@ zero_extendqisi2
+ 773              	.LVL63:
+ 774              		.loc 2 90 39 view .LVU169
+ 775 000c 1154     		strb	r1, [r2, r0]
+ARM GAS  build/m2a.s 			page 21
+
+
+  91:src/circbuffer.h **** 
+  92:src/circbuffer.h ****     advancePointer(myBuff);
+ 776              		.loc 2 92 5 is_stmt 1 view .LVU170
+ 777 000e 1846     		mov	r0, r3
+ 778 0010 FFF7FEFF 		bl	advancePointer
+ 779              	.LVL64:
+  93:src/circbuffer.h **** }
+ 780              		.loc 2 93 1 is_stmt 0 view .LVU171
+ 781 0014 08BD     		pop	{r3, pc}
+ 782              	.LVL65:
+ 783              	.L65:
+  88:src/circbuffer.h **** 
+ 784              		.loc 2 88 18 discriminator 3 view .LVU172
+ 785 0016 034B     		ldr	r3, .L68
+ 786 0018 034A     		ldr	r2, .L68+4
+ 787 001a 5821     		movs	r1, #88
+ 788              	.LVL66:
+  88:src/circbuffer.h **** 
+ 789              		.loc 2 88 18 discriminator 3 view .LVU173
+ 790 001c 0348     		ldr	r0, .L68+8
+ 791              	.LVL67:
+  88:src/circbuffer.h **** 
+ 792              		.loc 2 88 18 discriminator 3 view .LVU174
+ 793 001e FFF7FEFF 		bl	__assert_func
+ 794              	.LVL68:
+ 795              	.L69:
+ 796 0022 00BF     		.align	2
+ 797              	.L68:
+ 798 0024 00000000 		.word	.LC4
+ 799 0028 00000000 		.word	__func__.8
+ 800 002c 08000000 		.word	.LC1
+ 801              		.cfi_endproc
+ 802              	.LFE10:
+ 804              		.section	.rodata.circbuffer_dequeue.str1.4,"aMS",%progbits,1
+ 805              		.align	2
+ 806              	.LC5:
+ 807 0000 64617461 		.ascii	"data\000"
+ 807      00
+ 808 0005 000000   		.align	2
+ 809              	.LC6:
+ 810 0008 6D794275 		.ascii	"myBuff->buffer\000"
+ 810      66662D3E 
+ 810      62756666 
+ 810      657200
+ 811              		.section	.text.circbuffer_dequeue,"ax",%progbits
+ 812              		.align	1
+ 813              		.global	circbuffer_dequeue
+ 814              		.syntax unified
+ 815              		.thumb
+ 816              		.thumb_func
+ 818              	circbuffer_dequeue:
+ 819              	.LVL69:
+ 820              	.LFB11:
+  94:src/circbuffer.h **** 
+  95:src/circbuffer.h **** bool circbuffer_dequeue(circbuffer* myBuff, char* data){
+ 821              		.loc 2 95 55 is_stmt 1 view -0
+ 822              		.cfi_startproc
+ARM GAS  build/m2a.s 			page 22
+
+
+ 823              		@ args = 0, pretend = 0, frame = 0
+ 824              		@ frame_needed = 0, uses_anonymous_args = 0
+ 825              		.loc 2 95 55 is_stmt 0 view .LVU176
+ 826 0000 70B5     		push	{r4, r5, r6, lr}
+ 827              	.LCFI13:
+ 828              		.cfi_def_cfa_offset 16
+ 829              		.cfi_offset 4, -16
+ 830              		.cfi_offset 5, -12
+ 831              		.cfi_offset 6, -8
+ 832              		.cfi_offset 14, -4
+  96:src/circbuffer.h ****     assert(myBuff);
+ 833              		.loc 2 96 4 is_stmt 1 view .LVU177
+ 834              		.loc 2 96 16 is_stmt 0 view .LVU178
+ 835 0002 48B1     		cbz	r0, .L77
+ 836 0004 0C46     		mov	r4, r1
+ 837 0006 0546     		mov	r5, r0
+  97:src/circbuffer.h ****     assert(data);
+ 838              		.loc 2 97 4 is_stmt 1 view .LVU179
+ 839              		.loc 2 97 16 is_stmt 0 view .LVU180
+ 840 0008 61B1     		cbz	r1, .L78
+  98:src/circbuffer.h ****     assert(myBuff->buffer);
+ 841              		.loc 2 98 4 is_stmt 1 view .LVU181
+ 842              		.loc 2 98 10 is_stmt 0 view .LVU182
+ 843 000a 0668     		ldr	r6, [r0]
+ 844              		.loc 2 98 16 view .LVU183
+ 845 000c 86B1     		cbz	r6, .L79
+  99:src/circbuffer.h **** 
+ 100:src/circbuffer.h ****     bool x = false;
+ 846              		.loc 2 100 4 is_stmt 1 view .LVU184
+ 847              	.LVL70:
+ 101:src/circbuffer.h **** 
+ 102:src/circbuffer.h ****     if(!bufferIsEmpty(myBuff)){
+ 848              		.loc 2 102 5 view .LVU185
+ 849              		.loc 2 102 9 is_stmt 0 view .LVU186
+ 850 000e FFF7FEFF 		bl	bufferIsEmpty
+ 851              	.LVL71:
+ 852              		.loc 2 102 7 view .LVU187
+ 853 0012 98B1     		cbz	r0, .L80
+ 100:src/circbuffer.h **** 
+ 854              		.loc 2 100 9 view .LVU188
+ 855 0014 0020     		movs	r0, #0
+ 856              	.LVL72:
+ 857              	.L74:
+ 103:src/circbuffer.h ****         *data = myBuff->buffer[myBuff->tailIndex];
+ 104:src/circbuffer.h ****         backPointer(myBuff);
+ 105:src/circbuffer.h ****         x = true;
+ 106:src/circbuffer.h ****     }
+ 107:src/circbuffer.h **** 
+ 108:src/circbuffer.h ****     return x;
+ 858              		.loc 2 108 5 is_stmt 1 view .LVU189
+ 109:src/circbuffer.h **** }
+ 859              		.loc 2 109 1 is_stmt 0 view .LVU190
+ 860 0016 70BD     		pop	{r4, r5, r6, pc}
+ 861              	.LVL73:
+ 862              	.L77:
+  96:src/circbuffer.h ****     assert(data);
+ 863              		.loc 2 96 18 discriminator 1 view .LVU191
+ARM GAS  build/m2a.s 			page 23
+
+
+ 864 0018 0C4B     		ldr	r3, .L81
+ 865 001a 0D4A     		ldr	r2, .L81+4
+ 866 001c 6021     		movs	r1, #96
+ 867              	.LVL74:
+  96:src/circbuffer.h ****     assert(data);
+ 868              		.loc 2 96 18 discriminator 1 view .LVU192
+ 869 001e 0D48     		ldr	r0, .L81+8
+ 870              	.LVL75:
+  96:src/circbuffer.h ****     assert(data);
+ 871              		.loc 2 96 18 discriminator 1 view .LVU193
+ 872 0020 FFF7FEFF 		bl	__assert_func
+ 873              	.LVL76:
+ 874              	.L78:
+  97:src/circbuffer.h ****     assert(myBuff->buffer);
+ 875              		.loc 2 97 18 discriminator 1 view .LVU194
+ 876 0024 0C4B     		ldr	r3, .L81+12
+ 877 0026 0A4A     		ldr	r2, .L81+4
+ 878 0028 6121     		movs	r1, #97
+ 879              	.LVL77:
+  97:src/circbuffer.h ****     assert(myBuff->buffer);
+ 880              		.loc 2 97 18 discriminator 1 view .LVU195
+ 881 002a 0A48     		ldr	r0, .L81+8
+ 882              	.LVL78:
+  97:src/circbuffer.h ****     assert(myBuff->buffer);
+ 883              		.loc 2 97 18 discriminator 1 view .LVU196
+ 884 002c FFF7FEFF 		bl	__assert_func
+ 885              	.LVL79:
+ 886              	.L79:
+  98:src/circbuffer.h **** 
+ 887              		.loc 2 98 18 discriminator 1 view .LVU197
+ 888 0030 0A4B     		ldr	r3, .L81+16
+ 889 0032 074A     		ldr	r2, .L81+4
+ 890 0034 6221     		movs	r1, #98
+ 891              	.LVL80:
+  98:src/circbuffer.h **** 
+ 892              		.loc 2 98 18 discriminator 1 view .LVU198
+ 893 0036 0748     		ldr	r0, .L81+8
+ 894              	.LVL81:
+  98:src/circbuffer.h **** 
+ 895              		.loc 2 98 18 discriminator 1 view .LVU199
+ 896 0038 FFF7FEFF 		bl	__assert_func
+ 897              	.LVL82:
+ 898              	.L80:
+ 103:src/circbuffer.h ****         backPointer(myBuff);
+ 899              		.loc 2 103 9 is_stmt 1 view .LVU200
+ 103:src/circbuffer.h ****         backPointer(myBuff);
+ 900              		.loc 2 103 38 is_stmt 0 view .LVU201
+ 901 003c 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 103:src/circbuffer.h ****         backPointer(myBuff);
+ 902              		.loc 2 103 31 view .LVU202
+ 903 003e F35C     		ldrb	r3, [r6, r3]	@ zero_extendqisi2
+ 103:src/circbuffer.h ****         backPointer(myBuff);
+ 904              		.loc 2 103 15 view .LVU203
+ 905 0040 2370     		strb	r3, [r4]
+ 104:src/circbuffer.h ****         x = true;
+ 906              		.loc 2 104 9 is_stmt 1 view .LVU204
+ 907 0042 2846     		mov	r0, r5
+ARM GAS  build/m2a.s 			page 24
+
+
+ 908 0044 FFF7FEFF 		bl	backPointer
+ 909              	.LVL83:
+ 105:src/circbuffer.h ****     }
+ 910              		.loc 2 105 9 view .LVU205
+ 105:src/circbuffer.h ****     }
+ 911              		.loc 2 105 11 is_stmt 0 view .LVU206
+ 912 0048 0120     		movs	r0, #1
+ 913 004a E4E7     		b	.L74
+ 914              	.L82:
+ 915              		.align	2
+ 916              	.L81:
+ 917 004c 00000000 		.word	.LC0
+ 918 0050 00000000 		.word	__func__.6
+ 919 0054 08000000 		.word	.LC1
+ 920 0058 00000000 		.word	.LC5
+ 921 005c 08000000 		.word	.LC6
+ 922              		.cfi_endproc
+ 923              	.LFE11:
+ 925              		.section	.rodata.circbuff_recent.str1.4,"aMS",%progbits,1
+ 926              		.align	2
+ 927              	.LC7:
+ 928 0000 6D794275 		.ascii	"myBuff && data && myBuff->buffer\000"
+ 928      66662026 
+ 928      26206461 
+ 928      74612026 
+ 928      26206D79 
+ 929              		.section	.text.circbuff_recent,"ax",%progbits
+ 930              		.align	1
+ 931              		.global	circbuff_recent
+ 932              		.syntax unified
+ 933              		.thumb
+ 934              		.thumb_func
+ 936              	circbuff_recent:
+ 937              	.LVL84:
+ 938              	.LFB12:
+ 110:src/circbuffer.h **** 
+ 111:src/circbuffer.h **** bool circbuff_recent(circbuffer* myBuff, char* data){
+ 939              		.loc 2 111 52 is_stmt 1 view -0
+ 940              		.cfi_startproc
+ 941              		@ args = 0, pretend = 0, frame = 0
+ 942              		@ frame_needed = 0, uses_anonymous_args = 0
+ 943              		.loc 2 111 52 is_stmt 0 view .LVU208
+ 944 0000 70B5     		push	{r4, r5, r6, lr}
+ 945              	.LCFI14:
+ 946              		.cfi_def_cfa_offset 16
+ 947              		.cfi_offset 4, -16
+ 948              		.cfi_offset 5, -12
+ 949              		.cfi_offset 6, -8
+ 950              		.cfi_offset 14, -4
+ 112:src/circbuffer.h ****     assert(myBuff && data && myBuff->buffer);
+ 951              		.loc 2 112 4 is_stmt 1 view .LVU209
+ 952              		.loc 2 112 16 is_stmt 0 view .LVU210
+ 953 0002 88B1     		cbz	r0, .L84
+ 954 0004 0C46     		mov	r4, r1
+ 955 0006 0646     		mov	r6, r0
+ 956              		.loc 2 112 11 discriminator 2 view .LVU211
+ 957 0008 71B1     		cbz	r1, .L84
+ARM GAS  build/m2a.s 			page 25
+
+
+ 958              		.loc 2 112 28 discriminator 4 view .LVU212
+ 959 000a 0568     		ldr	r5, [r0]
+ 960              		.loc 2 112 19 discriminator 4 view .LVU213
+ 961 000c 65B1     		cbz	r5, .L84
+ 113:src/circbuffer.h **** 
+ 114:src/circbuffer.h ****     bool x = false;
+ 962              		.loc 2 114 4 is_stmt 1 view .LVU214
+ 963              	.LVL85:
+ 115:src/circbuffer.h **** 
+ 116:src/circbuffer.h ****     if(!bufferIsEmpty(myBuff)){
+ 964              		.loc 2 116 5 view .LVU215
+ 965              		.loc 2 116 9 is_stmt 0 view .LVU216
+ 966 000e FFF7FEFF 		bl	bufferIsEmpty
+ 967              	.LVL86:
+ 968              		.loc 2 116 7 view .LVU217
+ 969 0012 B0B9     		cbnz	r0, .L88
+ 117:src/circbuffer.h **** 
+ 118:src/circbuffer.h ****         if(myBuff->headIndex == 0){
+ 970              		.loc 2 118 9 is_stmt 1 view .LVU218
+ 971              		.loc 2 118 18 is_stmt 0 view .LVU219
+ 972 0014 3379     		ldrb	r3, [r6, #4]	@ zero_extendqisi2
+ 973              		.loc 2 118 11 view .LVU220
+ 974 0016 6BB9     		cbnz	r3, .L87
+ 119:src/circbuffer.h ****             myBuff->headIndex = (myBuff->max) - 1;
+ 975              		.loc 2 119 13 is_stmt 1 view .LVU221
+ 976              		.loc 2 119 40 is_stmt 0 view .LVU222
+ 977 0018 F379     		ldrb	r3, [r6, #7]	@ zero_extendqisi2
+ 978              		.loc 2 119 47 view .LVU223
+ 979 001a 013B     		subs	r3, r3, #1
+ 980 001c DBB2     		uxtb	r3, r3
+ 981              		.loc 2 119 31 view .LVU224
+ 982 001e 3371     		strb	r3, [r6, #4]
+ 120:src/circbuffer.h ****             *data = myBuff->buffer[myBuff->headIndex];
+ 983              		.loc 2 120 13 is_stmt 1 view .LVU225
+ 984              		.loc 2 120 35 is_stmt 0 view .LVU226
+ 985 0020 EB5C     		ldrb	r3, [r5, r3]	@ zero_extendqisi2
+ 986              		.loc 2 120 19 view .LVU227
+ 987 0022 2370     		strb	r3, [r4]
+ 121:src/circbuffer.h ****             x = true;	
+ 988              		.loc 2 121 13 is_stmt 1 view .LVU228
+ 989              	.LVL87:
+ 990              		.loc 2 121 15 is_stmt 0 view .LVU229
+ 991 0024 0120     		movs	r0, #1
+ 992 0026 0DE0     		b	.L86
+ 993              	.LVL88:
+ 994              	.L84:
+ 112:src/circbuffer.h **** 
+ 995              		.loc 2 112 18 discriminator 5 view .LVU230
+ 996 0028 074B     		ldr	r3, .L90
+ 997 002a 084A     		ldr	r2, .L90+4
+ 998 002c 7021     		movs	r1, #112
+ 999              	.LVL89:
+ 112:src/circbuffer.h **** 
+ 1000              		.loc 2 112 18 discriminator 5 view .LVU231
+ 1001 002e 0848     		ldr	r0, .L90+8
+ 1002              	.LVL90:
+ 112:src/circbuffer.h **** 
+ARM GAS  build/m2a.s 			page 26
+
+
+ 1003              		.loc 2 112 18 discriminator 5 view .LVU232
+ 1004 0030 FFF7FEFF 		bl	__assert_func
+ 1005              	.LVL91:
+ 1006              	.L87:
+ 122:src/circbuffer.h ****         }   
+ 123:src/circbuffer.h ****         else{
+ 124:src/circbuffer.h ****             *data = myBuff->buffer[--(myBuff->headIndex)];
+ 1007              		.loc 2 124 13 is_stmt 1 view .LVU233
+ 1008              		.loc 2 124 36 is_stmt 0 view .LVU234
+ 1009 0034 013B     		subs	r3, r3, #1
+ 1010 0036 DBB2     		uxtb	r3, r3
+ 1011              		.loc 2 124 19 view .LVU235
+ 1012 0038 3371     		strb	r3, [r6, #4]
+ 1013              		.loc 2 124 35 view .LVU236
+ 1014 003a EB5C     		ldrb	r3, [r5, r3]	@ zero_extendqisi2
+ 1015              		.loc 2 124 19 view .LVU237
+ 1016 003c 2370     		strb	r3, [r4]
+ 125:src/circbuffer.h ****             x = true;
+ 1017              		.loc 2 125 13 is_stmt 1 view .LVU238
+ 1018              	.LVL92:
+ 1019              		.loc 2 125 15 is_stmt 0 view .LVU239
+ 1020 003e 0120     		movs	r0, #1
+ 1021 0040 00E0     		b	.L86
+ 1022              	.LVL93:
+ 1023              	.L88:
+ 114:src/circbuffer.h **** 
+ 1024              		.loc 2 114 9 view .LVU240
+ 1025 0042 0020     		movs	r0, #0
+ 1026              	.LVL94:
+ 1027              	.L86:
+ 126:src/circbuffer.h ****         }
+ 127:src/circbuffer.h ****     }
+ 128:src/circbuffer.h **** 
+ 129:src/circbuffer.h ****     return x;
+ 1028              		.loc 2 129 5 is_stmt 1 view .LVU241
+ 130:src/circbuffer.h **** }
+ 1029              		.loc 2 130 1 is_stmt 0 view .LVU242
+ 1030 0044 70BD     		pop	{r4, r5, r6, pc}
+ 1031              	.LVL95:
+ 1032              	.L91:
+ 1033              		.loc 2 130 1 view .LVU243
+ 1034 0046 00BF     		.align	2
+ 1035              	.L90:
+ 1036 0048 00000000 		.word	.LC7
+ 1037 004c 00000000 		.word	__func__.4
+ 1038 0050 08000000 		.word	.LC1
+ 1039              		.cfi_endproc
+ 1040              	.LFE12:
+ 1042              		.section	.text._write,"ax",%progbits
+ 1043              		.align	1
+ 1044              		.global	_write
+ 1045              		.syntax unified
+ 1046              		.thumb
+ 1047              		.thumb_func
+ 1049              	_write:
+ 1050              	.LVL96:
+ 1051              	.LFB14:
+ARM GAS  build/m2a.s 			page 27
+
+
+  24:src/m2a.c     ****     int i;
+ 1052              		.loc 1 24 41 is_stmt 1 view -0
+ 1053              		.cfi_startproc
+ 1054              		@ args = 0, pretend = 0, frame = 0
+ 1055              		@ frame_needed = 0, uses_anonymous_args = 0
+  24:src/m2a.c     ****     int i;
+ 1056              		.loc 1 24 41 is_stmt 0 view .LVU245
+ 1057 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1058              	.LCFI15:
+ 1059              		.cfi_def_cfa_offset 24
+ 1060              		.cfi_offset 3, -24
+ 1061              		.cfi_offset 4, -20
+ 1062              		.cfi_offset 5, -16
+ 1063              		.cfi_offset 6, -12
+ 1064              		.cfi_offset 7, -8
+ 1065              		.cfi_offset 14, -4
+  25:src/m2a.c     **** 
+ 1066              		.loc 1 25 5 is_stmt 1 view .LVU246
+  27:src/m2a.c     **** 	    for(i = 0; i < len; i++){
+ 1067              		.loc 1 27 5 view .LVU247
+  27:src/m2a.c     **** 	    for(i = 0; i < len; i++){
+ 1068              		.loc 1 27 30 is_stmt 0 view .LVU248
+ 1069 0002 0138     		subs	r0, r0, #1
+ 1070              	.LVL97:
+  27:src/m2a.c     **** 	    for(i = 0; i < len; i++){
+ 1071              		.loc 1 27 8 view .LVU249
+ 1072 0004 0128     		cmp	r0, #1
+ 1073 0006 13D8     		bhi	.L101
+ 1074 0008 0D46     		mov	r5, r1
+ 1075 000a 1746     		mov	r7, r2
+  28:src/m2a.c     **** 		    if(ptr[i] == '\n')
+ 1076              		.loc 1 28 12 view .LVU250
+ 1077 000c 0024     		movs	r4, #0
+ 1078 000e 04E0     		b	.L93
+ 1079              	.LVL98:
+ 1080              	.L95:
+  32:src/m2a.c     **** 	    }
+ 1081              		.loc 1 32 7 is_stmt 1 discriminator 2 view .LVU251
+ 1082 0010 3178     		ldrb	r1, [r6]	@ zero_extendqisi2
+ 1083 0012 0B48     		ldr	r0, .L102
+ 1084 0014 FFF7FEFF 		bl	usart_send_blocking
+ 1085              	.LVL99:
+  28:src/m2a.c     **** 		    if(ptr[i] == '\n')
+ 1086              		.loc 1 28 27 discriminator 2 view .LVU252
+ 1087 0018 0134     		adds	r4, r4, #1
+ 1088              	.LVL100:
+ 1089              	.L93:
+  28:src/m2a.c     **** 		    if(ptr[i] == '\n')
+ 1090              		.loc 1 28 19 discriminator 1 view .LVU253
+ 1091 001a BC42     		cmp	r4, r7
+ 1092 001c 0EDA     		bge	.L92
+  29:src/m2a.c     **** 			    usart_send_blocking(USART2, '\r');
+ 1093              		.loc 1 29 7 view .LVU254
+  29:src/m2a.c     **** 			    usart_send_blocking(USART2, '\r');
+ 1094              		.loc 1 29 13 is_stmt 0 view .LVU255
+ 1095 001e 2E19     		adds	r6, r5, r4
+ 1096 0020 2B5D     		ldrb	r3, [r5, r4]	@ zero_extendqisi2
+ARM GAS  build/m2a.s 			page 28
+
+
+  29:src/m2a.c     **** 			    usart_send_blocking(USART2, '\r');
+ 1097              		.loc 1 29 9 view .LVU256
+ 1098 0022 0A2B     		cmp	r3, #10
+ 1099 0024 F4D1     		bne	.L95
+  30:src/m2a.c     **** 
+ 1100              		.loc 1 30 8 is_stmt 1 view .LVU257
+ 1101 0026 0D21     		movs	r1, #13
+ 1102 0028 0548     		ldr	r0, .L102
+ 1103 002a FFF7FEFF 		bl	usart_send_blocking
+ 1104              	.LVL101:
+ 1105 002e EFE7     		b	.L95
+ 1106              	.LVL102:
+ 1107              	.L101:
+  38:src/m2a.c     ****     return -1;
+ 1108              		.loc 1 38 4 view .LVU258
+  38:src/m2a.c     ****     return -1;
+ 1109              		.loc 1 38 6 is_stmt 0 view .LVU259
+ 1110 0030 FFF7FEFF 		bl	__errno
+ 1111              	.LVL103:
+  38:src/m2a.c     ****     return -1;
+ 1112              		.loc 1 38 10 view .LVU260
+ 1113 0034 0523     		movs	r3, #5
+ 1114 0036 0360     		str	r3, [r0]
+  39:src/m2a.c     **** }
+ 1115              		.loc 1 39 5 is_stmt 1 view .LVU261
+  39:src/m2a.c     **** }
+ 1116              		.loc 1 39 12 is_stmt 0 view .LVU262
+ 1117 0038 4FF0FF34 		mov	r4, #-1
+ 1118              	.L92:
+  40:src/m2a.c     **** //Converts input to caps
+ 1119              		.loc 1 40 1 view .LVU263
+ 1120 003c 2046     		mov	r0, r4
+ 1121 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1122              	.L103:
+ 1123              		.align	2
+ 1124              	.L102:
+ 1125 0040 00440040 		.word	1073759232
+ 1126              		.cfi_endproc
+ 1127              	.LFE14:
+ 1129              		.section	.text.convertCaps,"ax",%progbits
+ 1130              		.align	1
+ 1131              		.global	convertCaps
+ 1132              		.syntax unified
+ 1133              		.thumb
+ 1134              		.thumb_func
+ 1136              	convertCaps:
+ 1137              	.LVL104:
+ 1138              	.LFB15:
+  42:src/m2a.c     ****    if(*toConvert >= 'a' && *toConvert <= 'z')
+ 1139              		.loc 1 42 34 is_stmt 1 view -0
+ 1140              		.cfi_startproc
+ 1141              		@ args = 0, pretend = 0, frame = 0
+ 1142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1143              		@ link register save eliminated.
+  43:src/m2a.c     ****       *toConvert = (*toConvert - 'a') + 'A';
+ 1144              		.loc 1 43 4 view .LVU265
+  43:src/m2a.c     ****       *toConvert = (*toConvert - 'a') + 'A';
+ARM GAS  build/m2a.s 			page 29
+
+
+ 1145              		.loc 1 43 7 is_stmt 0 view .LVU266
+ 1146 0000 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+  43:src/m2a.c     ****       *toConvert = (*toConvert - 'a') + 'A';
+ 1147              		.loc 1 43 25 view .LVU267
+ 1148 0002 A2F16103 		sub	r3, r2, #97
+ 1149 0006 DBB2     		uxtb	r3, r3
+  43:src/m2a.c     ****       *toConvert = (*toConvert - 'a') + 'A';
+ 1150              		.loc 1 43 6 view .LVU268
+ 1151 0008 192B     		cmp	r3, #25
+ 1152 000a 01D8     		bhi	.L104
+  44:src/m2a.c     **** }
+ 1153              		.loc 1 44 7 is_stmt 1 view .LVU269
+  44:src/m2a.c     **** }
+ 1154              		.loc 1 44 39 is_stmt 0 view .LVU270
+ 1155 000c 203A     		subs	r2, r2, #32
+  44:src/m2a.c     **** }
+ 1156              		.loc 1 44 18 view .LVU271
+ 1157 000e 0270     		strb	r2, [r0]
+ 1158              	.L104:
+  45:src/m2a.c     **** //Encrypts with Vigenere cipher using 'key'
+ 1159              		.loc 1 45 1 view .LVU272
+ 1160 0010 7047     		bx	lr
+ 1161              		.cfi_endproc
+ 1162              	.LFE15:
+ 1164              		.section	.text.encrypt,"ax",%progbits
+ 1165              		.align	1
+ 1166              		.global	encrypt
+ 1167              		.syntax unified
+ 1168              		.thumb
+ 1169              		.thumb_func
+ 1171              	encrypt:
+ 1172              	.LVL105:
+ 1173              	.LFB16:
+  47:src/m2a.c     ****    static uint8_t pos = 0;
+ 1174              		.loc 1 47 29 is_stmt 1 view -0
+ 1175              		.cfi_startproc
+ 1176              		@ args = 0, pretend = 0, frame = 0
+ 1177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1178              		@ link register save eliminated.
+  48:src/m2a.c     ****    
+ 1179              		.loc 1 48 4 view .LVU274
+  50:src/m2a.c     ****    ++pos;
+ 1180              		.loc 1 50 4 view .LVU275
+  50:src/m2a.c     ****    ++pos;
+ 1181              		.loc 1 50 33 is_stmt 0 view .LVU276
+ 1182 0000 0C49     		ldr	r1, .L109
+ 1183 0002 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 1184 0004 0C4B     		ldr	r3, .L109+4
+ 1185 0006 9B5C     		ldrb	r3, [r3, r2]	@ zero_extendqisi2
+  50:src/m2a.c     ****    ++pos;
+ 1186              		.loc 1 50 28 view .LVU277
+ 1187 0008 1844     		add	r0, r0, r3
+ 1188              	.LVL106:
+  50:src/m2a.c     ****    ++pos;
+ 1189              		.loc 1 50 40 view .LVU278
+ 1190 000a 0C4B     		ldr	r3, .L109+8
+ 1191 000c 83FB00C3 		smull	ip, r3, r3, r0
+ARM GAS  build/m2a.s 			page 30
+
+
+ 1192 0010 DB10     		asrs	r3, r3, #3
+ 1193 0012 4FF01A0C 		mov	ip, #26
+ 1194 0016 0CFB1303 		mls	r3, ip, r3, r0
+  50:src/m2a.c     ****    ++pos;
+ 1195              		.loc 1 50 46 view .LVU279
+ 1196 001a D8B2     		uxtb	r0, r3
+  50:src/m2a.c     ****    ++pos;
+ 1197              		.loc 1 50 14 view .LVU280
+ 1198 001c 4130     		adds	r0, r0, #65
+ 1199 001e C0B2     		uxtb	r0, r0
+ 1200              	.LVL107:
+  51:src/m2a.c     **** 
+ 1201              		.loc 1 51 4 is_stmt 1 view .LVU281
+ 1202 0020 531C     		adds	r3, r2, #1
+ 1203 0022 DBB2     		uxtb	r3, r3
+ 1204 0024 0B70     		strb	r3, [r1]
+  53:src/m2a.c     **** 
+ 1205              		.loc 1 53 4 view .LVU282
+  53:src/m2a.c     **** 
+ 1206              		.loc 1 53 8 is_stmt 0 view .LVU283
+ 1207 0026 152B     		cmp	r3, #21
+ 1208 0028 02D0     		beq	.L108
+ 1209              	.L107:
+  53:src/m2a.c     **** 
+ 1210              		.loc 1 53 8 discriminator 4 view .LVU284
+ 1211 002a 024A     		ldr	r2, .L109
+ 1212 002c 1370     		strb	r3, [r2]
+  55:src/m2a.c     **** }
+ 1213              		.loc 1 55 4 is_stmt 1 discriminator 4 view .LVU285
+  56:src/m2a.c     **** //Decrypts with Vigenere cipher using 'key'
+ 1214              		.loc 1 56 1 is_stmt 0 discriminator 4 view .LVU286
+ 1215 002e 7047     		bx	lr
+ 1216              	.L108:
+  53:src/m2a.c     **** 
+ 1217              		.loc 1 53 8 view .LVU287
+ 1218 0030 0023     		movs	r3, #0
+ 1219 0032 FAE7     		b	.L107
+ 1220              	.L110:
+ 1221              		.align	2
+ 1222              	.L109:
+ 1223 0034 00000000 		.word	pos.3
+ 1224 0038 00000000 		.word	key
+ 1225 003c 4FECC44E 		.word	1321528399
+ 1226              		.cfi_endproc
+ 1227              	.LFE16:
+ 1229              		.section	.text.decrypt,"ax",%progbits
+ 1230              		.align	1
+ 1231              		.global	decrypt
+ 1232              		.syntax unified
+ 1233              		.thumb
+ 1234              		.thumb_func
+ 1236              	decrypt:
+ 1237              	.LVL108:
+ 1238              	.LFB17:
+  58:src/m2a.c     ****    static uint8_t pos = 0;
+ 1239              		.loc 1 58 29 is_stmt 1 view -0
+ 1240              		.cfi_startproc
+ARM GAS  build/m2a.s 			page 31
+
+
+ 1241              		@ args = 0, pretend = 0, frame = 0
+ 1242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1243              		@ link register save eliminated.
+  58:src/m2a.c     ****    static uint8_t pos = 0;
+ 1244              		.loc 1 58 29 is_stmt 0 view .LVU289
+ 1245 0000 10B4     		push	{r4}
+ 1246              	.LCFI16:
+ 1247              		.cfi_def_cfa_offset 4
+ 1248              		.cfi_offset 4, -4
+  59:src/m2a.c     **** 
+ 1249              		.loc 1 59 4 is_stmt 1 view .LVU290
+  61:src/m2a.c     ****    ++pos;
+ 1250              		.loc 1 61 4 view .LVU291
+  61:src/m2a.c     ****    ++pos;
+ 1251              		.loc 1 61 33 is_stmt 0 view .LVU292
+ 1252 0002 0F4C     		ldr	r4, .L115
+ 1253 0004 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1254 0006 0F4B     		ldr	r3, .L115+4
+ 1255 0008 9B5C     		ldrb	r3, [r3, r2]	@ zero_extendqisi2
+  61:src/m2a.c     ****    ++pos;
+ 1256              		.loc 1 61 28 view .LVU293
+ 1257 000a C01A     		subs	r0, r0, r3
+ 1258              	.LVL109:
+  61:src/m2a.c     ****    ++pos;
+ 1259              		.loc 1 61 39 view .LVU294
+ 1260 000c 1A30     		adds	r0, r0, #26
+  61:src/m2a.c     ****    ++pos;
+ 1261              		.loc 1 61 45 view .LVU295
+ 1262 000e 0E49     		ldr	r1, .L115+8
+ 1263 0010 81FB0031 		smull	r3, r1, r1, r0
+ 1264 0014 C317     		asrs	r3, r0, #31
+ 1265 0016 C3EBE103 		rsb	r3, r3, r1, asr #3
+ 1266 001a 1A21     		movs	r1, #26
+ 1267 001c 01FB1303 		mls	r3, r1, r3, r0
+  61:src/m2a.c     ****    ++pos;
+ 1268              		.loc 1 61 51 view .LVU296
+ 1269 0020 D8B2     		uxtb	r0, r3
+  61:src/m2a.c     ****    ++pos;
+ 1270              		.loc 1 61 14 view .LVU297
+ 1271 0022 4130     		adds	r0, r0, #65
+ 1272 0024 C0B2     		uxtb	r0, r0
+ 1273              	.LVL110:
+  62:src/m2a.c     **** 
+ 1274              		.loc 1 62 4 is_stmt 1 view .LVU298
+ 1275 0026 531C     		adds	r3, r2, #1
+ 1276 0028 DBB2     		uxtb	r3, r3
+ 1277 002a 2370     		strb	r3, [r4]
+  64:src/m2a.c     **** 
+ 1278              		.loc 1 64 4 view .LVU299
+  64:src/m2a.c     **** 
+ 1279              		.loc 1 64 8 is_stmt 0 view .LVU300
+ 1280 002c 152B     		cmp	r3, #21
+ 1281 002e 04D0     		beq	.L114
+ 1282              	.L112:
+  64:src/m2a.c     **** 
+ 1283              		.loc 1 64 8 discriminator 4 view .LVU301
+ 1284 0030 034A     		ldr	r2, .L115
+ARM GAS  build/m2a.s 			page 32
+
+
+ 1285 0032 1370     		strb	r3, [r2]
+  66:src/m2a.c     **** }
+ 1286              		.loc 1 66 4 is_stmt 1 discriminator 4 view .LVU302
+  67:src/m2a.c     **** //Basic delay loop
+ 1287              		.loc 1 67 1 is_stmt 0 discriminator 4 view .LVU303
+ 1288 0034 5DF8044B 		ldr	r4, [sp], #4
+ 1289              	.LCFI17:
+ 1290              		.cfi_remember_state
+ 1291              		.cfi_restore 4
+ 1292              		.cfi_def_cfa_offset 0
+ 1293 0038 7047     		bx	lr
+ 1294              	.L114:
+ 1295              	.LCFI18:
+ 1296              		.cfi_restore_state
+  64:src/m2a.c     **** 
+ 1297              		.loc 1 64 8 view .LVU304
+ 1298 003a 0023     		movs	r3, #0
+ 1299 003c F8E7     		b	.L112
+ 1300              	.L116:
+ 1301 003e 00BF     		.align	2
+ 1302              	.L115:
+ 1303 0040 00000000 		.word	pos.2
+ 1304 0044 00000000 		.word	key
+ 1305 0048 4FECC44E 		.word	1321528399
+ 1306              		.cfi_endproc
+ 1307              	.LFE17:
+ 1309              		.section	.text.main,"ax",%progbits
+ 1310              		.align	1
+ 1311              		.global	main
+ 1312              		.syntax unified
+ 1313              		.thumb
+ 1314              		.thumb_func
+ 1316              	main:
+ 1317              	.LFB21:
+ 126:src/m2a.c     **** 
+ 127:src/m2a.c     **** 
+ 128:src/m2a.c     **** int main(void)  {
+ 1318              		.loc 1 128 16 is_stmt 1 view -0
+ 1319              		.cfi_startproc
+ 1320              		@ Volatile: function does not return.
+ 1321              		@ args = 0, pretend = 0, frame = 8
+ 1322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1323 0000 00B5     		push	{lr}
+ 1324              	.LCFI19:
+ 1325              		.cfi_def_cfa_offset 4
+ 1326              		.cfi_offset 14, -4
+ 1327 0002 83B0     		sub	sp, sp, #12
+ 1328              	.LCFI20:
+ 1329              		.cfi_def_cfa_offset 16
+ 129:src/m2a.c     ****    // initialize the hardware
+ 130:src/m2a.c     ****    clock_enable();
+ 1330              		.loc 1 130 4 view .LVU306
+ 1331 0004 FFF7FEFF 		bl	clock_enable
+ 1332              	.LVL111:
+ 131:src/m2a.c     ****    usart_setup(); 
+ 1333              		.loc 1 131 4 view .LVU307
+ 1334 0008 FFF7FEFF 		bl	usart_setup
+ARM GAS  build/m2a.s 			page 33
+
+
+ 1335              	.LVL112:
+ 132:src/m2a.c     ****    timer_setup();
+ 1336              		.loc 1 132 4 view .LVU308
+ 1337 000c FFF7FEFF 		bl	timer_setup
+ 1338              	.LVL113:
+ 133:src/m2a.c     **** 
+ 134:src/m2a.c     ****    rcc_periph_clock_enable(RCC_GPIOA);
+ 1339              		.loc 1 134 4 view .LVU309
+ 1340 0010 4FF41860 		mov	r0, #2432
+ 1341 0014 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1342              	.LVL114:
+ 135:src/m2a.c     ****    rcc_periph_clock_enable(RCC_GPIOC);
+ 1343              		.loc 1 135 4 view .LVU310
+ 1344 0018 40F68210 		movw	r0, #2434
+ 1345 001c FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1346              	.LVL115:
+ 136:src/m2a.c     ****    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO5);
+ 1347              		.loc 1 136 4 view .LVU311
+ 1348 0020 2023     		movs	r3, #32
+ 1349 0022 0122     		movs	r2, #1
+ 1350 0024 1146     		mov	r1, r2
+ 1351 0026 4FF09040 		mov	r0, #1207959552
+ 1352 002a FFF7FEFF 		bl	gpio_mode_setup
+ 1353              	.LVL116:
+ 137:src/m2a.c     ****    gpio_mode_setup(GPIOC, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, GPIO13);
+ 1354              		.loc 1 137 4 view .LVU312
+ 1355 002e 4FF40053 		mov	r3, #8192
+ 1356 0032 0122     		movs	r2, #1
+ 1357 0034 0021     		movs	r1, #0
+ 1358 0036 3C48     		ldr	r0, .L132
+ 1359 0038 FFF7FEFF 		bl	gpio_mode_setup
+ 1360              	.LVL117:
+ 138:src/m2a.c     **** 
+ 139:src/m2a.c     ****    //Initialize the buffer 
+ 140:src/m2a.c     ****    static struct circbuffer myCircBuffer;
+ 1361              		.loc 1 140 4 view .LVU313
+ 141:src/m2a.c     ****    static char buffer[1024];
+ 1362              		.loc 1 141 4 view .LVU314
+ 142:src/m2a.c     ****    circbuffer_init(&myCircBuffer, buffer, max);
+ 1363              		.loc 1 142 4 view .LVU315
+ 1364 003c 4FF48062 		mov	r2, #1024
+ 1365 0040 3A49     		ldr	r1, .L132+4
+ 1366 0042 3B48     		ldr	r0, .L132+8
+ 1367 0044 FFF7FEFF 		bl	circbuffer_init
+ 1368              	.LVL118:
+ 143:src/m2a.c     **** 
+ 144:src/m2a.c     ****    char charSending = '\0';
+ 1369              		.loc 1 144 4 view .LVU316
+ 1370              		.loc 1 144 9 is_stmt 0 view .LVU317
+ 1371 0048 0023     		movs	r3, #0
+ 1372 004a 8DF80730 		strb	r3, [sp, #7]
+ 1373 004e 18E0     		b	.L122
+ 1374              	.L130:
+ 145:src/m2a.c     **** 
+ 146:src/m2a.c     ****    while(true) {
+ 147:src/m2a.c     ****    //Check RX flag to recieve
+ 148:src/m2a.c     ****       if (usart_get_flag(USART2, USART_ISR_RXNE)) 
+ARM GAS  build/m2a.s 			page 34
+
+
+ 149:src/m2a.c     ****       {  
+ 150:src/m2a.c     ****          circbuffer_queue(&myCircBuffer, usart_recv_blocking(USART2));
+ 1375              		.loc 1 150 10 is_stmt 1 view .LVU318
+ 1376              		.loc 1 150 42 is_stmt 0 view .LVU319
+ 1377 0050 3848     		ldr	r0, .L132+12
+ 1378 0052 FFF7FEFF 		bl	usart_recv_blocking
+ 1379              	.LVL119:
+ 1380              		.loc 1 150 10 view .LVU320
+ 1381 0056 C1B2     		uxtb	r1, r0
+ 1382 0058 3548     		ldr	r0, .L132+8
+ 1383 005a FFF7FEFF 		bl	circbuffer_queue
+ 1384              	.LVL120:
+ 1385 005e 16E0     		b	.L118
+ 1386              	.L120:
+ 151:src/m2a.c     ****       }
+ 152:src/m2a.c     ****    //Cipher code with sending once done
+ 153:src/m2a.c     ****       if(!bufferIsEmpty(&myCircBuffer)){
+ 154:src/m2a.c     ****          circbuffer_dequeue(&myCircBuffer, &charSending);
+ 155:src/m2a.c     ****          convertCaps(&charSending);
+ 156:src/m2a.c     **** 
+ 157:src/m2a.c     ****          if(IS_B1_PRESSED)
+ 158:src/m2a.c     ****             charSending = decrypt(charSending);
+ 159:src/m2a.c     **** 
+ 160:src/m2a.c     ****          else if(IS_B1_RELEASED)
+ 1387              		.loc 1 160 15 is_stmt 1 view .LVU321
+ 1388              		.loc 1 160 18 is_stmt 0 view .LVU322
+ 1389 0060 4FF40051 		mov	r1, #8192
+ 1390 0064 3048     		ldr	r0, .L132
+ 1391 0066 FFF7FEFF 		bl	gpio_get
+ 1392              	.LVL121:
+ 1393              		.loc 1 160 17 view .LVU323
+ 1394 006a 60BB     		cbnz	r0, .L127
+ 1395              	.L121:
+ 161:src/m2a.c     ****             charSending = encrypt(charSending);
+ 162:src/m2a.c     **** 
+ 163:src/m2a.c     **** 
+ 164:src/m2a.c     ****          if(usart_get_flag(USART2, USART_ISR_TXE))
+ 1396              		.loc 1 164 10 is_stmt 1 view .LVU324
+ 1397              		.loc 1 164 13 is_stmt 0 view .LVU325
+ 1398 006c 8021     		movs	r1, #128
+ 1399 006e 3148     		ldr	r0, .L132+12
+ 1400 0070 FFF7FEFF 		bl	usart_get_flag
+ 1401              	.LVL122:
+ 1402              		.loc 1 164 12 view .LVU326
+ 1403 0074 70BB     		cbnz	r0, .L128
+ 1404              	.L119:
+ 165:src/m2a.c     ****             usart_send_blocking(USART2, charSending);
+ 166:src/m2a.c     ****       }
+ 167:src/m2a.c     **** 
+ 168:src/m2a.c     ****    //Timer checks to toggle led
+ 169:src/m2a.c     ****       if(timer_get_flag(TIM2, TIM_SR_CC1IF)){
+ 1405              		.loc 1 169 7 is_stmt 1 view .LVU327
+ 1406              		.loc 1 169 10 is_stmt 0 view .LVU328
+ 1407 0076 0221     		movs	r1, #2
+ 1408 0078 4FF08040 		mov	r0, #1073741824
+ 1409 007c FFF7FEFF 		bl	timer_get_flag
+ 1410              	.LVL123:
+ARM GAS  build/m2a.s 			page 35
+
+
+ 1411              		.loc 1 169 9 view .LVU329
+ 1412 0080 70BB     		cbnz	r0, .L129
+ 1413              	.L122:
+ 146:src/m2a.c     ****    //Check RX flag to recieve
+ 1414              		.loc 1 146 4 is_stmt 1 view .LVU330
+ 148:src/m2a.c     ****       {  
+ 1415              		.loc 1 148 7 view .LVU331
+ 148:src/m2a.c     ****       {  
+ 1416              		.loc 1 148 11 is_stmt 0 view .LVU332
+ 1417 0082 2021     		movs	r1, #32
+ 1418 0084 2B48     		ldr	r0, .L132+12
+ 1419 0086 FFF7FEFF 		bl	usart_get_flag
+ 1420              	.LVL124:
+ 148:src/m2a.c     ****       {  
+ 1421              		.loc 1 148 10 view .LVU333
+ 1422 008a 0028     		cmp	r0, #0
+ 1423 008c E0D1     		bne	.L130
+ 1424              	.L118:
+ 153:src/m2a.c     ****          circbuffer_dequeue(&myCircBuffer, &charSending);
+ 1425              		.loc 1 153 7 is_stmt 1 view .LVU334
+ 153:src/m2a.c     ****          circbuffer_dequeue(&myCircBuffer, &charSending);
+ 1426              		.loc 1 153 11 is_stmt 0 view .LVU335
+ 1427 008e 2848     		ldr	r0, .L132+8
+ 1428 0090 FFF7FEFF 		bl	bufferIsEmpty
+ 1429              	.LVL125:
+ 153:src/m2a.c     ****          circbuffer_dequeue(&myCircBuffer, &charSending);
+ 1430              		.loc 1 153 9 view .LVU336
+ 1431 0094 0028     		cmp	r0, #0
+ 1432 0096 EED1     		bne	.L119
+ 154:src/m2a.c     ****          convertCaps(&charSending);
+ 1433              		.loc 1 154 10 is_stmt 1 view .LVU337
+ 1434 0098 0DF10701 		add	r1, sp, #7
+ 1435 009c 2448     		ldr	r0, .L132+8
+ 1436 009e FFF7FEFF 		bl	circbuffer_dequeue
+ 1437              	.LVL126:
+ 155:src/m2a.c     **** 
+ 1438              		.loc 1 155 10 view .LVU338
+ 1439 00a2 0DF10700 		add	r0, sp, #7
+ 1440 00a6 FFF7FEFF 		bl	convertCaps
+ 1441              	.LVL127:
+ 157:src/m2a.c     ****             charSending = decrypt(charSending);
+ 1442              		.loc 1 157 10 view .LVU339
+ 157:src/m2a.c     ****             charSending = decrypt(charSending);
+ 1443              		.loc 1 157 14 is_stmt 0 view .LVU340
+ 1444 00aa 4FF40051 		mov	r1, #8192
+ 1445 00ae 1E48     		ldr	r0, .L132
+ 1446 00b0 FFF7FEFF 		bl	gpio_get
+ 1447              	.LVL128:
+ 157:src/m2a.c     ****             charSending = decrypt(charSending);
+ 1448              		.loc 1 157 12 view .LVU341
+ 1449 00b4 0028     		cmp	r0, #0
+ 1450 00b6 D3D1     		bne	.L120
+ 158:src/m2a.c     **** 
+ 1451              		.loc 1 158 13 is_stmt 1 view .LVU342
+ 158:src/m2a.c     **** 
+ 1452              		.loc 1 158 27 is_stmt 0 view .LVU343
+ 1453 00b8 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ARM GAS  build/m2a.s 			page 36
+
+
+ 1454 00bc FFF7FEFF 		bl	decrypt
+ 1455              	.LVL129:
+ 158:src/m2a.c     **** 
+ 1456              		.loc 1 158 25 view .LVU344
+ 1457 00c0 8DF80700 		strb	r0, [sp, #7]
+ 1458 00c4 D2E7     		b	.L121
+ 1459              	.L127:
+ 161:src/m2a.c     **** 
+ 1460              		.loc 1 161 13 is_stmt 1 view .LVU345
+ 161:src/m2a.c     **** 
+ 1461              		.loc 1 161 27 is_stmt 0 view .LVU346
+ 1462 00c6 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 1463 00ca FFF7FEFF 		bl	encrypt
+ 1464              	.LVL130:
+ 161:src/m2a.c     **** 
+ 1465              		.loc 1 161 25 view .LVU347
+ 1466 00ce 8DF80700 		strb	r0, [sp, #7]
+ 1467 00d2 CBE7     		b	.L121
+ 1468              	.L128:
+ 165:src/m2a.c     ****       }
+ 1469              		.loc 1 165 13 is_stmt 1 view .LVU348
+ 1470 00d4 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 1471 00d8 1648     		ldr	r0, .L132+12
+ 1472 00da FFF7FEFF 		bl	usart_send_blocking
+ 1473              	.LVL131:
+ 1474 00de CAE7     		b	.L119
+ 1475              	.L129:
+ 170:src/m2a.c     ****          timer_clear_flag(TIM2, TIM_SR_CC1IF);
+ 1476              		.loc 1 170 10 view .LVU349
+ 1477 00e0 0221     		movs	r1, #2
+ 1478 00e2 4FF08040 		mov	r0, #1073741824
+ 1479 00e6 FFF7FEFF 		bl	timer_clear_flag
+ 1480              	.LVL132:
+ 171:src/m2a.c     ****       
+ 172:src/m2a.c     ****          if(IS_B1_PRESSED){
+ 1481              		.loc 1 172 10 view .LVU350
+ 1482              		.loc 1 172 14 is_stmt 0 view .LVU351
+ 1483 00ea 4FF40051 		mov	r1, #8192
+ 1484 00ee 0E48     		ldr	r0, .L132
+ 1485 00f0 FFF7FEFF 		bl	gpio_get
+ 1486              	.LVL133:
+ 1487              		.loc 1 172 12 view .LVU352
+ 1488 00f4 88B1     		cbz	r0, .L131
+ 1489              	.L123:
+ 173:src/m2a.c     ****             timer_set_period(TIM2,2500); //0.125 seconds
+ 174:src/m2a.c     ****          }
+ 175:src/m2a.c     ****          if(IS_B1_RELEASED)
+ 1490              		.loc 1 175 10 is_stmt 1 view .LVU353
+ 1491              		.loc 1 175 13 is_stmt 0 view .LVU354
+ 1492 00f6 4FF40051 		mov	r1, #8192
+ 1493 00fa 0B48     		ldr	r0, .L132
+ 1494 00fc FFF7FEFF 		bl	gpio_get
+ 1495              	.LVL134:
+ 1496              		.loc 1 175 12 view .LVU355
+ 1497 0100 28B1     		cbz	r0, .L124
+ 176:src/m2a.c     ****          {
+ 177:src/m2a.c     ****             timer_set_period(TIM2, 10000); //0.5 seconds
+ARM GAS  build/m2a.s 			page 37
+
+
+ 1498              		.loc 1 177 13 is_stmt 1 view .LVU356
+ 1499 0102 42F21071 		movw	r1, #10000
+ 1500 0106 4FF08040 		mov	r0, #1073741824
+ 1501 010a FFF7FEFF 		bl	timer_set_period
+ 1502              	.LVL135:
+ 1503              	.L124:
+ 178:src/m2a.c     ****          }
+ 179:src/m2a.c     **** 
+ 180:src/m2a.c     ****          TOGGLE_LD2;
+ 1504              		.loc 1 180 10 view .LVU357
+ 1505 010e 2021     		movs	r1, #32
+ 1506 0110 4FF09040 		mov	r0, #1207959552
+ 1507 0114 FFF7FEFF 		bl	gpio_toggle
+ 1508              	.LVL136:
+ 1509 0118 B3E7     		b	.L122
+ 1510              	.L131:
+ 173:src/m2a.c     ****          }
+ 1511              		.loc 1 173 13 view .LVU358
+ 1512 011a 40F6C411 		movw	r1, #2500
+ 1513 011e 4FF08040 		mov	r0, #1073741824
+ 1514 0122 FFF7FEFF 		bl	timer_set_period
+ 1515              	.LVL137:
+ 1516 0126 E6E7     		b	.L123
+ 1517              	.L133:
+ 1518              		.align	2
+ 1519              	.L132:
+ 1520 0128 00080048 		.word	1207961600
+ 1521 012c 00000000 		.word	buffer.0
+ 1522 0130 00000000 		.word	myCircBuffer.1
+ 1523 0134 00440040 		.word	1073759232
+ 1524              		.cfi_endproc
+ 1525              	.LFE21:
+ 1527              		.section	.bss.buffer.0,"aw",%nobits
+ 1528              		.align	2
+ 1531              	buffer.0:
+ 1532 0000 00000000 		.space	1024
+ 1532      00000000 
+ 1532      00000000 
+ 1532      00000000 
+ 1532      00000000 
+ 1533              		.section	.bss.myCircBuffer.1,"aw",%nobits
+ 1534              		.align	2
+ 1537              	myCircBuffer.1:
+ 1538 0000 00000000 		.space	8
+ 1538      00000000 
+ 1539              		.section	.bss.pos.2,"aw",%nobits
+ 1542              	pos.2:
+ 1543 0000 00       		.space	1
+ 1544              		.section	.bss.pos.3,"aw",%nobits
+ 1547              	pos.3:
+ 1548 0000 00       		.space	1
+ 1549              		.section	.rodata.__func__.4,"a"
+ 1550              		.align	2
+ 1553              	__func__.4:
+ 1554 0000 63697263 		.ascii	"circbuff_recent\000"
+ 1554      62756666 
+ 1554      5F726563 
+ARM GAS  build/m2a.s 			page 38
+
+
+ 1554      656E7400 
+ 1555              		.section	.rodata.__func__.5,"a"
+ 1556              		.align	2
+ 1559              	__func__.5:
+ 1560 0000 6261636B 		.ascii	"backPointer\000"
+ 1560      506F696E 
+ 1560      74657200 
+ 1561              		.section	.rodata.__func__.6,"a"
+ 1562              		.align	2
+ 1565              	__func__.6:
+ 1566 0000 63697263 		.ascii	"circbuffer_dequeue\000"
+ 1566      62756666 
+ 1566      65725F64 
+ 1566      65717565 
+ 1566      756500
+ 1567              		.section	.rodata.__func__.7,"a"
+ 1568              		.align	2
+ 1571              	__func__.7:
+ 1572 0000 61647661 		.ascii	"advancePointer\000"
+ 1572      6E636550 
+ 1572      6F696E74 
+ 1572      657200
+ 1573              		.section	.rodata.__func__.8,"a"
+ 1574              		.align	2
+ 1577              	__func__.8:
+ 1578 0000 63697263 		.ascii	"circbuffer_queue\000"
+ 1578      62756666 
+ 1578      65725F71 
+ 1578      75657565 
+ 1578      00
+ 1579              		.section	.rodata.__func__.9,"a"
+ 1580              		.align	2
+ 1583              	__func__.9:
+ 1584 0000 63697263 		.ascii	"circbuff_entries\000"
+ 1584      62756666 
+ 1584      5F656E74 
+ 1584      72696573 
+ 1584      00
+ 1585              		.section	.rodata.__func__.10,"a"
+ 1586              		.align	2
+ 1589              	__func__.10:
+ 1590 0000 62756666 		.ascii	"bufferIsFull\000"
+ 1590      65724973 
+ 1590      46756C6C 
+ 1590      00
+ 1591              		.section	.rodata.__func__.11,"a"
+ 1592              		.align	2
+ 1595              	__func__.11:
+ 1596 0000 63697263 		.ascii	"circbuffer_init\000"
+ 1596      62756666 
+ 1596      65725F69 
+ 1596      6E697400 
+ 1597              		.section	.rodata.__func__.12,"a"
+ 1598              		.align	2
+ 1601              	__func__.12:
+ 1602 0000 62756666 		.ascii	"bufferIsEmpty\000"
+ 1602      65724973 
+ARM GAS  build/m2a.s 			page 39
+
+
+ 1602      456D7074 
+ 1602      7900
+ 1603              		.section	.rodata.__func__.13,"a"
+ 1604              		.align	2
+ 1607              	__func__.13:
+ 1608 0000 63697263 		.ascii	"circbuffer_reset\000"
+ 1608      62756666 
+ 1608      65725F72 
+ 1608      65736574 
+ 1608      00
+ 1609              		.global	max
+ 1610              		.section	.rodata.max,"a"
+ 1611              		.align	2
+ 1614              	max:
+ 1615 0000 00040000 		.word	1024
+ 1616              		.global	key
+ 1617              		.section	.rodata.key,"a"
+ 1618              		.align	2
+ 1621              	key:
+ 1622 0000 424F4C44 		.ascii	"BOLDFEARLESSCONFIDENT"
+ 1622      46454152 
+ 1622      4C455353 
+ 1622      434F4E46 
+ 1622      4944454E 
+ 1623              		.text
+ 1624              	.Letext0:
+ 1625              		.file 4 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 1626              		.file 5 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 1627              		.file 6 "/home/tatew/libopencm3/include/libopencm3/stm32/l4/rcc.h"
+ 1628              		.file 7 "/home/tatew/libopencm3/include/libopencm3/stm32/common/timer_common_all.h"
+ 1629              		.file 8 "/home/tatew/libopencm3/include/libopencm3/stm32/common/rcc_common_all.h"
+ 1630              		.file 9 "/home/tatew/libopencm3/include/libopencm3/stm32/common/usart_common_all.h"
+ 1631              		.file 10 "/home/tatew/libopencm3/include/libopencm3/stm32/common/gpio_common_f234.h"
+ 1632              		.file 11 "/home/tatew/libopencm3/include/libopencm3/stm32/common/gpio_common_all.h"
+ 1633              		.file 12 "/usr/arm-none-eabi/include/assert.h"
+ 1634              		.file 13 "/usr/arm-none-eabi/include/sys/errno.h"
+ARM GAS  build/m2a.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 m2a.c
+         build/m2a.s:21     .rodata.advancePointer.str1.4:00000000 $d
+         build/m2a.s:28     .text.advancePointer:00000000 $t
+         build/m2a.s:33     .text.advancePointer:00000000 advancePointer
+         build/m2a.s:123    .text.advancePointer:00000050 $d
+         build/m2a.s:1571   .rodata.__func__.7:00000000 __func__.7
+         build/m2a.s:130    .text.backPointer:00000000 $t
+         build/m2a.s:135    .text.backPointer:00000000 backPointer
+         build/m2a.s:191    .text.backPointer:0000002c $d
+         build/m2a.s:1559   .rodata.__func__.5:00000000 __func__.5
+         build/m2a.s:198    .text.clock_enable:00000000 $t
+         build/m2a.s:203    .text.clock_enable:00000000 clock_enable
+         build/m2a.s:246    .text.usart_setup:00000000 $t
+         build/m2a.s:251    .text.usart_setup:00000000 usart_setup
+         build/m2a.s:343    .text.usart_setup:00000094 $d
+         build/m2a.s:348    .text.timer_setup:00000000 $t
+         build/m2a.s:353    .text.timer_setup:00000000 timer_setup
+         build/m2a.s:392    .text.circbuffer_reset:00000000 $t
+         build/m2a.s:398    .text.circbuffer_reset:00000000 circbuffer_reset
+         build/m2a.s:439    .text.circbuffer_reset:0000001c $d
+         build/m2a.s:1607   .rodata.__func__.13:00000000 __func__.13
+         build/m2a.s:446    .text.bufferIsEmpty:00000000 $t
+         build/m2a.s:452    .text.bufferIsEmpty:00000000 bufferIsEmpty
+         build/m2a.s:513    .text.bufferIsEmpty:00000028 $d
+         build/m2a.s:1601   .rodata.__func__.12:00000000 __func__.12
+         build/m2a.s:520    .rodata.circbuffer_init.str1.4:00000000 $d
+         build/m2a.s:527    .text.circbuffer_init:00000000 $t
+         build/m2a.s:533    .text.circbuffer_init:00000000 circbuffer_init
+         build/m2a.s:598    .text.circbuffer_init:00000034 $d
+         build/m2a.s:1595   .rodata.__func__.11:00000000 __func__.11
+         build/m2a.s:606    .text.bufferIsFull:00000000 $t
+         build/m2a.s:612    .text.bufferIsFull:00000000 bufferIsFull
+         build/m2a.s:648    .text.bufferIsFull:00000014 $d
+         build/m2a.s:1589   .rodata.__func__.10:00000000 __func__.10
+         build/m2a.s:655    .text.circbuff_entries:00000000 $t
+         build/m2a.s:661    .text.circbuff_entries:00000000 circbuff_entries
+         build/m2a.s:732    .text.circbuff_entries:00000030 $d
+         build/m2a.s:1583   .rodata.__func__.9:00000000 __func__.9
+         build/m2a.s:739    .rodata.circbuffer_queue.str1.4:00000000 $d
+         build/m2a.s:743    .text.circbuffer_queue:00000000 $t
+         build/m2a.s:749    .text.circbuffer_queue:00000000 circbuffer_queue
+         build/m2a.s:798    .text.circbuffer_queue:00000024 $d
+         build/m2a.s:1577   .rodata.__func__.8:00000000 __func__.8
+         build/m2a.s:805    .rodata.circbuffer_dequeue.str1.4:00000000 $d
+         build/m2a.s:812    .text.circbuffer_dequeue:00000000 $t
+         build/m2a.s:818    .text.circbuffer_dequeue:00000000 circbuffer_dequeue
+         build/m2a.s:917    .text.circbuffer_dequeue:0000004c $d
+         build/m2a.s:1565   .rodata.__func__.6:00000000 __func__.6
+         build/m2a.s:926    .rodata.circbuff_recent.str1.4:00000000 $d
+         build/m2a.s:930    .text.circbuff_recent:00000000 $t
+         build/m2a.s:936    .text.circbuff_recent:00000000 circbuff_recent
+         build/m2a.s:1036   .text.circbuff_recent:00000048 $d
+         build/m2a.s:1553   .rodata.__func__.4:00000000 __func__.4
+         build/m2a.s:1043   .text._write:00000000 $t
+         build/m2a.s:1049   .text._write:00000000 _write
+         build/m2a.s:1125   .text._write:00000040 $d
+ARM GAS  build/m2a.s 			page 41
+
+
+         build/m2a.s:1130   .text.convertCaps:00000000 $t
+         build/m2a.s:1136   .text.convertCaps:00000000 convertCaps
+         build/m2a.s:1165   .text.encrypt:00000000 $t
+         build/m2a.s:1171   .text.encrypt:00000000 encrypt
+         build/m2a.s:1223   .text.encrypt:00000034 $d
+         build/m2a.s:1547   .bss.pos.3:00000000 pos.3
+         build/m2a.s:1621   .rodata.key:00000000 key
+         build/m2a.s:1230   .text.decrypt:00000000 $t
+         build/m2a.s:1236   .text.decrypt:00000000 decrypt
+         build/m2a.s:1303   .text.decrypt:00000040 $d
+         build/m2a.s:1542   .bss.pos.2:00000000 pos.2
+         build/m2a.s:1310   .text.main:00000000 $t
+         build/m2a.s:1316   .text.main:00000000 main
+         build/m2a.s:1520   .text.main:00000128 $d
+         build/m2a.s:1531   .bss.buffer.0:00000000 buffer.0
+         build/m2a.s:1537   .bss.myCircBuffer.1:00000000 myCircBuffer.1
+         build/m2a.s:1528   .bss.buffer.0:00000000 $d
+         build/m2a.s:1534   .bss.myCircBuffer.1:00000000 $d
+         build/m2a.s:1543   .bss.pos.2:00000000 $d
+         build/m2a.s:1548   .bss.pos.3:00000000 $d
+         build/m2a.s:1550   .rodata.__func__.4:00000000 $d
+         build/m2a.s:1556   .rodata.__func__.5:00000000 $d
+         build/m2a.s:1562   .rodata.__func__.6:00000000 $d
+         build/m2a.s:1568   .rodata.__func__.7:00000000 $d
+         build/m2a.s:1574   .rodata.__func__.8:00000000 $d
+         build/m2a.s:1580   .rodata.__func__.9:00000000 $d
+         build/m2a.s:1586   .rodata.__func__.10:00000000 $d
+         build/m2a.s:1592   .rodata.__func__.11:00000000 $d
+         build/m2a.s:1598   .rodata.__func__.12:00000000 $d
+         build/m2a.s:1604   .rodata.__func__.13:00000000 $d
+         build/m2a.s:1614   .rodata.max:00000000 max
+         build/m2a.s:1611   .rodata.max:00000000 $d
+         build/m2a.s:1618   .rodata.key:00000000 $d
+
+UNDEFINED SYMBOLS
+__assert_func
+rcc_osc_on
+rcc_set_main_pll
+rcc_periph_clock_enable
+gpio_mode_setup
+gpio_set_output_options
+gpio_set_af
+usart_set_baudrate
+usart_set_databits
+usart_set_stopbits
+usart_set_mode
+usart_set_parity
+usart_set_flow_control
+usart_enable
+rcc_periph_reset_pulse
+timer_set_prescaler
+timer_set_period
+timer_enable_counter
+usart_send_blocking
+__errno
+usart_recv_blocking
+gpio_get
+ARM GAS  build/m2a.s 			page 42
+
+
+usart_get_flag
+timer_get_flag
+timer_clear_flag
+gpio_toggle

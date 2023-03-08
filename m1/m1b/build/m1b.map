@@ -1,0 +1,679 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                              build/m1b.o (gpio_toggle)
+/home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                              build/m1b.o (gpio_mode_setup)
+/home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                              build/m1b.o (rcc_periph_clock_enable)
+/home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                              (reset_handler)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 build/m1b.o
+ .data          0x00000000        0x0 build/m1b.o
+ .bss           0x00000000        0x0 build/m1b.o
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .data          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .bss           0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_set
+                0x00000000        0x4 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_clear
+                0x00000000        0x6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_get
+                0x00000000        0x6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_port_read
+                0x00000000        0x6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_port_write
+                0x00000000        0x4 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .text.gpio_port_config_lock
+                0x00000000       0x10 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .text          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .data          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .bss           0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .text.gpio_set_output_options
+                0x00000000       0x36 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .text.gpio_set_af
+                0x00000000       0x58 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000      0xaa8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x1c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x56 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x51 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000      0x103 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x6a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000      0x1df /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0xe8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000      0x217 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000      0x37e /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0xca /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00000000       0x88 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .data          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .bss           0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_peripheral_enable_clock
+                0x00000000        0x8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_peripheral_disable_clock
+                0x00000000        0xa /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_peripheral_reset
+                0x00000000        0x8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_peripheral_clear_reset
+                0x00000000        0xa /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_periph_clock_disable
+                0x00000000       0x1c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_periph_reset_pulse
+                0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_periph_reset_hold
+                0x00000000        0x4 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_periph_reset_release
+                0x00000000        0x4 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_set_mco
+                0x00000000       0x14 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_osc_bypass_enable
+                0x00000000       0x2c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_osc_bypass_disable
+                0x00000000       0x2c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .text.rcc_get_div_from_hpre
+                0x00000000       0x18 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000      0xaa8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x1c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x56 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x51 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000      0x103 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x6a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000      0x1df /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0xe8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00000000      0x217 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .group         0x00000000        0xc /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .text          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .data          0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .bss           0x00000000        0x0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000      0xaa8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x1c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x56 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x51 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000      0x103 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x6a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000      0x1df /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00000000       0xe8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x08000000         0x0003e800         xr
+ram              0x20000000         0x00028000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/m1b.o
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a
+LOAD /home/tatew/libopencm3/lib/libopencm3_stm32l4.a
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/thumb/v7e-m+fp/hard/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/thumb/v7e-m+fp/hard/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/thumb/v7e-m+fp/hard/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a
+END GROUP
+
+.text           0x08000000      0x2f8
+ *(.vectors)
+ .vectors       0x08000000      0x1ac /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x08000000                vector_table
+ *(.text*)
+ .text.delay_loop
+                0x080001ac        0xc build/m1b.o
+ .text.main     0x080001b8       0x30 build/m1b.o
+                0x080001b8                main
+ .text.gpio_toggle
+                0x080001e8       0x12 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                0x080001e8                gpio_toggle
+ .text.gpio_mode_setup
+                0x080001fa       0x40 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                0x080001fa                gpio_mode_setup
+ .text.rcc_periph_clock_enable
+                0x0800023a       0x1a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                0x0800023a                rcc_periph_clock_enable
+ .text.blocking_handler
+                0x08000254        0x2 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x08000254                i2c4_ev_isr
+                0x08000254                usart3_isr
+                0x08000254                swpmi1_isr
+                0x08000254                tim7_isr
+                0x08000254                dma2d_isr
+                0x08000254                rng_isr
+                0x08000254                adc1_2_isr
+                0x08000254                i2c4_er_isr
+                0x08000254                blocking_handler
+                0x08000254                tsc_isr
+                0x08000254                tim5_isr
+                0x08000254                rtc_wkup_isr
+                0x08000254                otg_fs_isr
+                0x08000254                tim1_up_tim16_isr
+                0x08000254                spi1_isr
+                0x08000254                i2c3_er_isr
+                0x08000254                dma2_channel7_isr
+                0x08000254                exti2_isr
+                0x08000254                dma1_channel6_isr
+                0x08000254                dma1_channel5_isr
+                0x08000254                dma2_channel5_isr
+                0x08000254                tamp_stamp_isr
+                0x08000254                fmc_isr
+                0x08000254                can1_rx1_isr
+                0x08000254                usart1_isr
+                0x08000254                i2c3_ev_isr
+                0x08000254                usage_fault_handler
+                0x08000254                tim8_trg_com_isr
+                0x08000254                can2_rx0_isr
+                0x08000254                tim1_trg_com_tim17_isr
+                0x08000254                can2_rx1_isr
+                0x08000254                can1_sce_isr
+                0x08000254                tim1_cc_isr
+                0x08000254                can1_tx_isr
+                0x08000254                dma1_channel4_isr
+                0x08000254                tim8_brk_isr
+                0x08000254                dma2_channel4_isr
+                0x08000254                lptim1_isr
+                0x08000254                lpuart1_isr
+                0x08000254                can1_rx0_isr
+                0x08000254                rcc_isr
+                0x08000254                flash_isr
+                0x08000254                uart4_isr
+                0x08000254                rtc_alarm_isr
+                0x08000254                exti15_10_isr
+                0x08000254                hard_fault_handler
+                0x08000254                exti1_isr
+                0x08000254                i2c1_ev_isr
+                0x08000254                dma2_channel1_isr
+                0x08000254                dfsdm2_isr
+                0x08000254                spi2_isr
+                0x08000254                aes_isr
+                0x08000254                tim8_up_isr
+                0x08000254                tim6_dacunder_isr
+                0x08000254                dma2_channel6_isr
+                0x08000254                dma2_channel2_isr
+                0x08000254                exti3_isr
+                0x08000254                adc3_isr
+                0x08000254                tim3_isr
+                0x08000254                usart2_isr
+                0x08000254                sai1_isr
+                0x08000254                fpu_isr
+                0x08000254                i2c2_er_isr
+                0x08000254                i2c2_ev_isr
+                0x08000254                uart5_isr
+                0x08000254                dma1_channel1_isr
+                0x08000254                exti4_isr
+                0x08000254                dfsdm3_isr
+                0x08000254                comp_isr
+                0x08000254                mem_manage_handler
+                0x08000254                can2_tx_isr
+                0x08000254                lptim2_isr
+                0x08000254                lcd_isr
+                0x08000254                exti9_5_isr
+                0x08000254                dma2_channel3_isr
+                0x08000254                dfsdm1_isr
+                0x08000254                dma1_channel7_isr
+                0x08000254                pvd_pvm_isr
+                0x08000254                can2_sce_isr
+                0x08000254                tim4_isr
+                0x08000254                sai2_isr
+                0x08000254                dma1_channel2_isr
+                0x08000254                i2c1_er_isr
+                0x08000254                tim8_cc_isr
+                0x08000254                dcmi_isr
+                0x08000254                hash_crs_isr
+                0x08000254                bus_fault_handler
+                0x08000254                wwdg_isr
+                0x08000254                tim1_brk_tim15_isr
+                0x08000254                dma1_channel3_isr
+                0x08000254                sdmmc1_isr
+                0x08000254                spi3_isr
+                0x08000254                quadspi_isr
+                0x08000254                dfsdm0_isr
+                0x08000254                tim2_isr
+                0x08000254                exti0_isr
+ .text.null_handler
+                0x08000256        0x2 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x08000256                null_handler
+                0x08000256                sv_call_handler
+                0x08000256                pend_sv_handler
+                0x08000256                debug_monitor_handler
+                0x08000256                sys_tick_handler
+                0x08000256                nmi_handler
+ .text.reset_handler
+                0x08000258       0xa0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x08000258                reset_handler
+                0x080002f8                        . = ALIGN (0x4)
+ *(.rodata*)
+                0x080002f8                        . = ALIGN (0x4)
+
+.glue_7         0x080002f8        0x0
+ .glue_7        0x080002f8        0x0 linker stubs
+
+.glue_7t        0x080002f8        0x0
+ .glue_7t       0x080002f8        0x0 linker stubs
+
+.vfp11_veneer   0x080002f8        0x0
+ .vfp11_veneer  0x080002f8        0x0 linker stubs
+
+.v4_bx          0x080002f8        0x0
+ .v4_bx         0x080002f8        0x0 linker stubs
+
+.iplt           0x080002f8        0x0
+ .iplt          0x080002f8        0x0 build/m1b.o
+
+.rel.dyn        0x080002f8        0x0
+ .rel.iplt      0x080002f8        0x0 build/m1b.o
+
+.preinit_array  0x080002f8        0x0
+                0x080002f8                        . = ALIGN (0x4)
+                0x080002f8                        __preinit_array_start = .
+ *(.preinit_array)
+                0x080002f8                        __preinit_array_end = .
+
+.init_array     0x080002f8        0x0
+                0x080002f8                        . = ALIGN (0x4)
+                0x080002f8                        __init_array_start = .
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                0x080002f8                        __init_array_end = .
+
+.fini_array     0x080002f8        0x0
+                0x080002f8                        . = ALIGN (0x4)
+                0x080002f8                        __fini_array_start = .
+ *(.fini_array)
+ *(SORT_BY_NAME(.fini_array.*))
+                0x080002f8                        __fini_array_end = .
+
+.ARM.extab
+ *(.ARM.extab*)
+
+.ARM.exidx      0x080002f8        0x0
+                0x080002f8                        __exidx_start = .
+ *(.ARM.exidx*)
+                0x080002f8                        __exidx_end = .
+                0x080002f8                        . = ALIGN (0x4)
+                0x080002f8                        _etext = .
+
+.noinit
+ *(.noinit)
+                0x080002f8                        . = ALIGN (0x4)
+
+.data           0x20000000        0x0 load address 0x080002f8
+                0x20000000                        _data = .
+ *(.data*)
+                0x20000000                        . = ALIGN (0x4)
+ *(.ramfunctions)
+                0x20000000                        _edata = .
+                0x080002f8                        _data_loadaddr = LOADADDR (.data)
+
+.igot.plt       0x20000000        0x0 load address 0x080002f8
+ .igot.plt      0x20000000        0x0 build/m1b.o
+
+.bss            0x20000000        0x0 load address 0x080002f8
+ *(.bss*)
+ *(COMMON)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _ebss = .
+
+/DISCARD/
+ *(.eh_frame)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        end = .
+                0x20028000                        PROVIDE (_stack = (ORIGIN (ram) + LENGTH (ram)))
+OUTPUT(build/m1b.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000     0x148f
+ .debug_info    0x00000000      0x540 build/m1b.o
+ .debug_info    0x00000540      0x256 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_info    0x00000796      0x21b /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_info    0x000009b1      0x805 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_info    0x000011b6      0x2d9 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_abbrev   0x00000000      0x5b3
+ .debug_abbrev  0x00000000       0xf8 build/m1b.o
+ .debug_abbrev  0x000000f8      0x115 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_abbrev  0x0000020d       0xc2 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_abbrev  0x000002cf      0x185 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_abbrev  0x00000454      0x15f /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_loc      0x00000000       0x42
+ .debug_loc     0x00000000       0x42 build/m1b.o
+
+.debug_aranges  0x00000000      0x158
+ .debug_aranges
+                0x00000000       0x28 build/m1b.o
+ .debug_aranges
+                0x00000028       0x50 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_aranges
+                0x00000078       0x30 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_aranges
+                0x000000a8       0x80 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_aranges
+                0x00000128       0x30 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_ranges   0x00000000       0x18
+ .debug_ranges  0x00000000       0x18 build/m1b.o
+
+.debug_line     0x00000000     0x10c2
+ .debug_line    0x00000000      0x195 build/m1b.o
+ .debug_line    0x00000195      0x360 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_line    0x000004f5      0x430 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_line    0x00000925      0x3eb /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_line    0x00000d10      0x3b2 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_str      0x00000000     0xdb63
+ .debug_str     0x00000000      0x5b2 build/m1b.o
+                                0x662 (size before relaxing)
+ .debug_str     0x000005b2     0x649c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                               0x6635 (size before relaxing)
+ .debug_str     0x00006a4e       0x8a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                               0x6657 (size before relaxing)
+ .debug_str     0x00006ad8     0x43ff /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                               0x9875 (size before relaxing)
+ .debug_str     0x0000aed7     0x2c8c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                               0x6e97 (size before relaxing)
+
+.comment        0x00000000       0x23
+ .comment       0x00000000       0x23 build/m1b.o
+                                 0x24 (size before relaxing)
+ .comment       0x00000023       0x24 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .comment       0x00000023       0x24 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .comment       0x00000023       0x24 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .comment       0x00000023       0x24 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.ARM.attributes
+                0x00000000       0x34
+ .ARM.attributes
+                0x00000000       0x34 build/m1b.o
+ .ARM.attributes
+                0x00000034       0x34 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .ARM.attributes
+                0x00000068       0x34 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .ARM.attributes
+                0x0000009c       0x34 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .ARM.attributes
+                0x000000d0       0x34 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_frame    0x00000000      0x254
+ .debug_frame   0x00000000       0x38 build/m1b.o
+ .debug_frame   0x00000038       0x80 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_frame   0x000000b8       0x70 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_frame   0x00000128       0xe0 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_frame   0x00000208       0x4c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_loclists
+                0x00000000      0x26b
+ .debug_loclists
+                0x00000000       0x7e /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_loclists
+                0x0000007e       0xcf /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_loclists
+                0x0000014d       0x68 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_loclists
+                0x000001b5       0xb6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_rnglists
+                0x00000000       0xd1
+ .debug_rnglists
+                0x00000000       0x37 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_rnglists
+                0x00000037       0x1f /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_rnglists
+                0x00000056       0x5b /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_rnglists
+                0x000000b1       0x20 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+.debug_macro    0x00000000     0x30d8
+ .debug_macro   0x00000000       0xd6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x000000d6      0xaa8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000b7e       0x1c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000b9a       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000bbc       0x56 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000c12       0x51 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000c63      0x103 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000d66       0x6a /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000dd0      0x1df /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000faf       0x22 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00000fd1       0xe8 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x000010b9       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x0000112f      0x217 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00001346       0x76 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x000013bc      0x37e /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x0000173a       0xca /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x00001804       0x88 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_macro   0x0000188c       0xd6 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_macro   0x00001962       0xe1 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00001a43      0x215 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00001c58      0xcc1 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_macro   0x00002919       0xd3 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x000029ec      0x452 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00002e3e       0x6e /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_macro   0x00002eac      0x22c /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+
+Cross Reference Table
+
+Symbol                                            File
+__fini_array_end                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+__fini_array_start                                /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+__init_array_end                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+__init_array_start                                /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+__preinit_array_end                               /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+__preinit_array_start                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+_data                                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+_data_loadaddr                                    /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+_ebss                                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+_edata                                            /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+_stack                                            /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+adc1_2_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+adc3_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+aes_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+blocking_handler                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+bus_fault_handler                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can1_rx0_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can1_rx1_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can1_sce_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can1_tx_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can2_rx0_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can2_rx1_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can2_sce_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+can2_tx_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+comp_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dcmi_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+debug_monitor_handler                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dfsdm0_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dfsdm1_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dfsdm2_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dfsdm3_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel1_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel2_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel3_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel4_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel5_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel6_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma1_channel7_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel1_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel2_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel3_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel4_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel5_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel6_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2_channel7_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+dma2d_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti0_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti15_10_isr                                     /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti1_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti2_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti3_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti4_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+exti9_5_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+flash_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+fmc_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+fpu_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+gpio_clear                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_get                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_mode_setup                                   /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                                                  build/m1b.o
+gpio_port_config_lock                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_port_read                                    /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_port_write                                   /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_set                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+gpio_set_af                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+gpio_set_output_options                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+gpio_toggle                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                                                  build/m1b.o
+hard_fault_handler                                /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+hash_crs_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c1_er_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c1_ev_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c2_er_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c2_ev_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c3_er_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c3_ev_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c4_er_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+i2c4_ev_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+lcd_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+lptim1_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+lptim2_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+lpuart1_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+main                                              build/m1b.o
+                                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+mem_manage_handler                                /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+nmi_handler                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+null_handler                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+otg_fs_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+pend_sv_handler                                   /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+pvd_pvm_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+quadspi_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+rcc_get_div_from_hpre                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+rcc_osc_bypass_disable                            /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_osc_bypass_enable                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_periph_clock_disable                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_periph_clock_enable                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                                                  build/m1b.o
+rcc_periph_reset_hold                             /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_periph_reset_pulse                            /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_periph_reset_release                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_peripheral_clear_reset                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_peripheral_disable_clock                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_peripheral_enable_clock                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_peripheral_reset                              /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+rcc_set_mco                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+reset_handler                                     /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+rng_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+rtc_alarm_isr                                     /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+rtc_wkup_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+sai1_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+sai2_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+sdmmc1_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+spi1_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+spi2_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+spi3_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+sv_call_handler                                   /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+swpmi1_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+sys_tick_handler                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tamp_stamp_isr                                    /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim1_brk_tim15_isr                                /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim1_cc_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim1_trg_com_tim17_isr                            /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim1_up_tim16_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim2_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim3_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim4_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim5_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim6_dacunder_isr                                 /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim7_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim8_brk_isr                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim8_cc_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim8_trg_com_isr                                  /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tim8_up_isr                                       /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+tsc_isr                                           /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+uart4_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+uart5_isr                                         /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+usage_fault_handler                               /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+usart1_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+usart2_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+usart3_isr                                        /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+vector_table                                      /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+wwdg_isr                                          /home/tatew/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
